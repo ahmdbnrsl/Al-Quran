@@ -4,7 +4,7 @@ import { getData } from './service/getData';
 function App() {
   const [result, setResult] = useState([]);
   useEffect(() => {
-    getData((data) => {
+    getData((data: any) => {
       setResult(data);
     })
   }, [result]);
@@ -12,7 +12,7 @@ function App() {
     <>
       <div className="w-full min-h-screen p-5 bg-slate-900 text-white">
         {
-          result.map(dat => {
+          result.map((dat: any) => {
             return (
               <div>{dat.nama}</div>
             )
