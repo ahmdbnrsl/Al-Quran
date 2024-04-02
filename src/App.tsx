@@ -6,7 +6,7 @@ import { getData } from './service/getData';
 function Seceleton() {
   const arr = Array(114)
   return (
-    <div className="w-full min-h-screen p-5 bg-slate-50 text-gray-700 flex flex-wrap gap-5 justify-center">
+    <div className="w-full min-h-screen p-5 bg-slate-50 text-gray-700 flex flex-wrap gap-3 justify-center">
       {
         arr.fill(() => {}).map(() => {
           return (
@@ -41,22 +41,28 @@ function App() {
   }, [result, loading]);
   return (
     <>
+     <div className="flex justify-center items-center flex-col w-full bg-teal-600 px-5 py-8">
+       <div className="font-far font-normal text-white text-5xl">القران الكريم</div>
+       <div className="mt-6 font-far font-normal text-yellow-400 text-3xl">لَّا يَمَسُّهُۥٓ إِلَّا ٱلْمُطَهَّرُونَ</div>
+      </div>
       {loading && <Seceleton/>}
       {!loading && 
-      <div className="w-full min-h-screen p-5 bg-slate-50 text-gray-700 flex flex-wrap gap-3.5 justify-center" style={{direction: 'rtl'}}>
+      <div className="w-full min-h-screen p-5 bg-slate-50 text-gray-700 flex flex-wrap gap-3 justify-center">
         {
           result.map((dat: any) => {
             return (
               <div className="flex justify-between w-full px-4 py-3 rounded bg-gray-50 shadow shadow-2xl shadow-gray-200 border border-gray-200 items-center md:max-w-md">
               <div className="flex items-center gap-3">
-                <div className="text-blue-500 text-xl font-semibold">{dat.nomor.toLocaleString('ar-EG')}.</div>
+                <div className="text-teal-600 text-3xl font-normal">
+                  ۞
+                </div>
                 <div className="text-left">
-                  <p className="text-gray-900 font-medium font-arial text-sm">{dat.nama_latin} <span className="text-gray-600 font-normal text-xs">({dat.tempat_turun === 'mekah' ? 'makkiyah' : 'madaniyah'})</span></p>
-                  <p className="text-gray-600 text-xs font-normal font-arial">{dat.arti}</p>
-                  <p className="text-blue-500 text-xs font-normal font-arial">{dat.jumlah_ayat} Ayat</p>
+                  <p className="text-gray-900 font-medium font-arial text-sm">{dat.nama_latin}</p>
+                  <p className="text-gray-500 text-xs font-normal font-arial">{dat.arti}</p>
+                  <p className="text-gray-500 text-xs font-normal font-arial">{dat.tempat_turun === 'mekah' ? 'makkiyah' : 'madaniyah'} | {dat.jumlah_ayat} Ayat</p>
                 </div>
               </div>
-                <div className="text-gray-800 font-semibold text-xl font-ar">{dat.nama}</div>
+                <div className="text-teal-600 font-normal text-3xl font-far">{dat.nama}</div>
               </div>
             )
           })

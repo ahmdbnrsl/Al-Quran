@@ -10,6 +10,14 @@
     src: local('NotoNastaliqUrdu-Regular.ttf'), url('./font/Urdu/NotoNastaliqUrdu-Regular.ttf');
     src: url('./font/Urdu/NotoNastaliqUrdu-Regular.ttf') format('ttf');
   }
+  @font-face {
+    font-family: 'formalAr';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 200;
+    src: local('ReemKufi-Regular.ttf'), url('./font/ReemKufi/ReemKufi-Regular.ttf');
+    src: url('./font/ReemKufi/ReemKufi-Regular.ttf') format('ttf');
+  }
 }
 
 @tailwind utilities;

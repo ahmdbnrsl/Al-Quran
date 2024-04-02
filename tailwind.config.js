@@ -9,6 +9,7 @@ export default {
     extend: {
       fontFamily: {
         'ar': ['Arab', 'sans-serif'],
+        'far': ['formalAr', 'sans-serif'],
       },
     },
   },
