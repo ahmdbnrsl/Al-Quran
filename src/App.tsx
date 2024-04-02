@@ -56,7 +56,7 @@ function App() {
                   <p className="text-blue-500 text-xs font-normal font-arial">{dat.jumlah_ayat} Ayat</p>
                 </div>
               </div>
-                <div className="text-gray-800 font-semibold text-xl font-ar">{dat.nama}</div>
+                <div className="text-gray-800 font-semibold text-xl font-ar">{dat.nama.toLocaleString('ar-EG')}</div>
               </div>
             )
           })
