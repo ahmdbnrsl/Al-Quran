@@ -7,8 +7,8 @@
     font-style: normal;
     font-display: swap;
     font-weight: 400;
-    src: url(/font/ReemKufi/ReemKufi-Medium.ttf);
-    src: url(/font/ReemKufi/ReemKufi-Medium.ttf) format('ttf');
+    src: local('ReemKufi-Medium.ttf'), url('./font/ReemKufi/ReemKufi-Medium.ttf');
+    src: local('ReemKufi-Medium.ttf'), url('./font/ReemKufi/ReemKufi-Medium.ttf') format('ttf');
   }
 }
 
