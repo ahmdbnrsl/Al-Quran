@@ -43,7 +43,7 @@ function App() {
     <>
       {loading && <Seceleton/>}
       {!loading && 
-      <div className="w-full min-h-screen p-5 bg-slate-50 text-gray-700 flex flex-wrap gap-3.5 justify-center text-right">
+      <div className="w-full min-h-screen p-5 bg-slate-50 text-gray-700 flex flex-wrap gap-3.5 justify-center" style={{direction: 'rtl'}}>
         {
           result.map((dat: any) => {
             return (
