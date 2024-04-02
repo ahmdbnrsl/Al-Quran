@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
+
+@layer base {
+  @font-face {
+    font-family: 'Arab';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+    src: url(/font/ReemKufi/ReemKufi-Medium.ttf);
+    src: url(/font/ReemKufi/ReemKufi-Medium.ttf) format('ttf');
+  }
+}
+
 @tailwind utilities;
