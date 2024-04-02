@@ -8,7 +8,7 @@ function Seceleton() {
   return (
     <div className="w-full min-h-screen p-5 bg-slate-50 text-gray-700 flex flex-wrap gap-5 justify-center">
       {
-        arr.fill().map((item: any) => {
+        arr.fill().map(() => {
           return (
             <div className="flex justify-between items-center w-full px-4 py-3 rounded bg-white shadow md:max-w-md">
               <div className="flex items-center gap-3">
