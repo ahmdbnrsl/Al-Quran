@@ -49,8 +49,8 @@ function App() {
             return (
               <div className="flex justify-between w-full px-4 py-3 rounded bg-gray-50 shadow shadow-2xl shadow-gray-200 border border-gray-200 items-center md:max-w-md">
               <div className="flex items-center gap-3">
-                <div className="text-blue-500 text-lg font-semibold">{dat.nomor.toLocaleString('ar-EG')}.</div>
-                <div>
+                <div className="text-blue-500 text-xl font-semibold">{dat.nomor.toLocaleString('ar-EG')}.</div>
+                <div className="text-left">
                   <p className="text-gray-900 font-medium font-arial text-sm">{dat.nama_latin} <span className="text-gray-600 font-normal text-xs">({dat.tempat_turun === 'mekah' ? 'makkiyah' : 'madaniyah'})</span></p>
                   <p className="text-gray-600 text-xs font-normal font-arial">{dat.arti}</p>
                   <p className="text-blue-500 text-xs font-normal font-arial">{dat.jumlah_ayat} Ayat</p>
