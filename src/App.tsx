@@ -41,9 +41,22 @@ function App() {
   }, [result, loading]);
   return (
     <>
-     <div className="flex justify-center items-center flex-col w-full bg-teal-600 px-5 py-8">
-       <div className="font-far font-normal text-white text-5xl">القران الكريم</div>
-       <div className="mt-6 font-far font-normal text-yellow-400 text-3xl">لَّا يَمَسُّهُۥٓ إِلَّا ٱلْمُطَهَّرُونَ</div>
+     <div className="flex justify-center items-center flex-col w-full bg-teal-600 px-5 py-5">
+       <div className="font-far font-normal text-white text-3xl">القران الكريم</div>
+       <div className="mt-6 px-5 py-2.5 bg-teal-900 w-full rounded max-w-4xl flex justify-between items-center">
+         <div>
+           <div><p className="h-full text-white font-normal text-xs">Lanjutkan membaca</p></div>
+           <div className="mt-2.5"><h1 className="h-full text-white font-medium text-2xl">Al-Fatihah</h1></div>
+           <div><p className="text-yellow-400 font-normal text-md h-full">Ayat 5</p></div>
+         </div>
+         <h1 className="font-far text-3xl font-normal text-white">الفاتحة</h1>
+       </div>
+      </div>
+      <div className="flex justify-center bg-gray-50 w-full p-5 shadow shadow-xl shadow-gray-100 border-b border-gray-200 sticky top-0 z-50">
+        <div className="w-full max-w-4xl flex justify-between">
+          <input className="bg-gray-100 rounded outline-0 border border-gray-200 px-5 py-1 text-md font-normal focus:border-teal-600 active:border-teal-600" type="text" placeholder="cari surah"/>
+          <div className="text-2xl text-gray-400">@</div>
+        </div>
       </div>
       {loading && <Seceleton/>}
       {!loading && 
@@ -57,7 +70,7 @@ function App() {
                   ۞
                 </div>
                 <div className="text-left">
-                  <p className="text-gray-900 font-medium font-arial text-sm">{dat.nama_latin}</p>
+                  <p className="text-gray-900 font-medium font-arial text-sm">{dat.nomor}. {dat.nama_latin}</p>
                   <p className="text-gray-500 text-xs font-normal font-arial">{dat.arti}</p>
                   <p className="text-gray-500 text-xs font-normal font-arial">{dat.tempat_turun === 'mekah' ? 'makkiyah' : 'madaniyah'} | {dat.jumlah_ayat} Ayat</p>
                 </div>
