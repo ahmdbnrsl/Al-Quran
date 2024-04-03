@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import { getData } from './service/getData';
+import { FaBtc } from "react-icons/fa6";
 
 function Seceleton() {
   const arr = Array(114)
@@ -55,7 +56,9 @@ function App() {
       <div className="flex justify-center bg-gray-50 w-full p-5 shadow shadow-xl shadow-gray-100 border-b border-gray-200 sticky top-0 z-50">
         <div className="w-full max-w-4xl flex justify-between">
           <input className="bg-gray-100 rounded outline-0 border border-gray-200 px-5 py-1 text-md font-normal focus:border-teal-600 active:border-teal-600" type="text" placeholder="cari surah"/>
-          <div className="text-2xl text-gray-400">@</div>
+          <div className="text-2xl text-gray-400">
+            <FaBtc/>
+          </div>
         </div>
       </div>
       {loading && <Seceleton/>}
