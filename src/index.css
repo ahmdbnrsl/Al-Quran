@@ -20,4 +20,16 @@
   }
 }
 
+@layer components {
+    .main-box {
+        @apply bg-slate-50 p-5 w-full min-h-screen dark:bg-slate-950
+    }
+    .input {
+        @apply w-full font-normal outline-0 bg-slate-100 px-4 py-2 border-2 border-slate-200 rounded-xl text-slate-500 focus:border-teal-500 active:border-teal-500 focus:font-medium active:font-medium focus:text-teal-500 active:text-teal-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:focus:border-orange-500 dark:active:border-orange-500 dark:focus:text-orange-500 dark:active:text-orange-500
+    }
+    .btn {
+        @apply text-white py-1 px-5 font-medium rounded bg-black dark:text-black dark:bg-white
+    }
+}
+
 @tailwind utilities;

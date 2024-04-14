@@ -1,7 +1,14 @@
 import axios from 'axios';
 
 export const getData: any = (callback: any) => {
-  axios.get('https://alquranqu.up.railway.app/surah')
+    const options = {
+        headers: {
+            'Authorization': '4Hm4DI3N1RU5L1211807_Vi4Fitri4nA==='
+        },
+        url: 'https://alquranqu.up.railway.app/surah'
+    }
+  axios
+  .request(options)
   .then(data => {
     callback(data.data);
   })
