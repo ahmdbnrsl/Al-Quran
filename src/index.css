@@ -18,6 +18,34 @@
     src: local('ReemKufi-Regular.ttf'), url('./font/ReemKufi/ReemKufi-Regular.ttf');
     src: url('./font/ReemKufi/ReemKufi-Regular.ttf') format('ttf');
   }
+  @font-face {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-display: swap;
+    src: local('Mulish-SemiBold.ttf'), url('./font/Mulish/Mulish-SemiBold.ttf');
+    src: url('./font/Mulish/Mulish-SemiBold.ttf') format('ttf');
+  }
+  @font-face {
+    font-family: 'Mulish-Bold';
+    font-style: normal;
+    font-display: swap;
+    src: local('Mulish-Black.ttf'), url('./font/Mulish/Mulish-Black.ttf');
+    src: url('./font/Mulish/Mulish-Black.ttf') format('ttf');
+  }
+  @font-face {
+    font-family: 'Mulish-SemiBold';
+    font-style: normal;
+    font-display: swap;
+    src: local('Mulish-ExtraBold.ttf'), url('./font/Mulish/Mulish-ExtraBold.ttf');
+    src: url('./font/Mulish/Mulish-ExtraBold.ttf') format('ttf');
+  }
+  @font-face {
+    font-family: 'Mukadimah';
+    font-style: normal;
+    font-display: swap;
+    src: local('Mukadimah.ttf'), url('./font/Mukadimah/Mukadimah.ttf');
+    src: url('./font/Mukadimah/Mukadimah.ttf') format('ttf');
+  }
 }
 
 @layer components {
@@ -25,25 +53,34 @@
         @apply bg-cover bg-light-theme bg-zinc-50 p-5 w-full min-h-screen dark:bg-dark-theme dark:bg-zinc-900
     }
     .auth-box {
-        @apply w-full flex flex-col items-center justify-center max-w-lg bg-zinc-100 rounded-xl p-5 shadow-2xl shadow-zinc-500 dark:bg-zinc-900 dark:shadow-zinc-950
+        @apply pb-5 w-full flex flex-col items-center justify-center max-w-lg bg-zinc-100 rounded-xl shadow-2xl shadow-zinc-500 dark:bg-zinc-900 dark:shadow-zinc-950
     }
     .title {
-        @apply mt-3 pb-2 text-4xl border-b-4 border-teal-500 text-teal-500 font-normal font-far dark:text-orange-500 dark:border-orange-500
+        @apply mt-8 pb-2 text-4xl text-teal-500 font-normal font-far dark:text-orange-500
     }
     .sub-title {
-        @apply font-far text-2xl mt-2 font-medium text-teal-500 dark:text-orange-500
+        @apply -mt-4 w-full text-center font-mukadimah pb-8 border-b border-zinc-200 text-3xl font-medium text-zinc-600 dark:text-zinc-300 dark:border-zinc-800
+    }
+    .auth-title {
+        @apply px-5 pb-3 w-full text-3xl font-mukadimah text-teal-500 dark:text-orange-500
     }
     .input-group {
-        @apply mt-4 w-full
+        @apply px-5 mt-4 w-full
     }
     .input-label {
-        @apply text-zinc-600 mx-3 font-normal text-sm dark:text-zinc-300
+        @apply font-mulish text-zinc-500 mx-3 font-normal text-sm dark:text-zinc-300
     }
     .input {
         @apply w-full font-normal outline-0 bg-zinc-100 px-4 py-2 border-2 border-zinc-200 rounded-xl text-zinc-500 focus:border-teal-500 active:border-teal-500 focus:font-medium active:font-medium focus:text-teal-500 active:text-teal-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:focus:border-orange-500 dark:active:border-orange-500 dark:focus:text-orange-500 dark:active:text-orange-500
     }
     .btn {
-        @apply mt-6 w-full text-zinc-50 py-2 px-5 font-medium rounded-xl bg-teal-500 dark:text-zinc-950 dark:bg-orange-500
+        @apply font-mulishsemibold mt-6 w-full text-zinc-50 py-2 px-5 text-lg rounded-xl bg-teal-500 dark:text-zinc-950 dark:bg-orange-500
+    }
+    .foot-auth {
+        @apply mt-8 mb-5 px-5 font-mulish text-zinc-500 font-normal text-sm dark:text-zinc-300
+    }
+    .navigate-auth {
+        @apply font-mulishsemibold text-teal-500 dark:text-orange-500
     }
 }
 
