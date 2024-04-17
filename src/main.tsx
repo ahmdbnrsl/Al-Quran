@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Register from './pages/Register.tsx';
+import Login from './pages/Login.tsx';
 import ListSurah from './pages/ListSurah.tsx';
 import App from './App.tsx'
 import './index.css'
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
     {
         path: "/daftar",
         element: <Register/>
+    },
+    {
+        path: "/masuk",
+        element: <Login/>
     }
 ])
 ReactDOM.createRoot(document.getElementById('root')!).render(

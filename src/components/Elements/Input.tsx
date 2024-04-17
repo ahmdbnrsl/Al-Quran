@@ -1,9 +1,10 @@
 export default (
-    {min, max, type, text}: {
+    {min, max, type, text, identify}: {
         min?: number,
         max?: number,
         type?: string,
-        text?: string
+        text?: string,
+        identify?: string
     }) => {
     return (
         <input
@@ -12,6 +13,8 @@ export default (
         minLength={min}
         maxLength={max}
         placeholder={text}
+        id={identify}
+        name={identify}
         />
     )
 }
