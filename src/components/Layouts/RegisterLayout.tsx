@@ -1,5 +1,6 @@
 import Input from '.././Elements/Input.tsx';
 import Button from '.././Elements/Button.tsx';
+import Label from '.././Elements/Label.tsx';
 import { FaUserCheck } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
@@ -10,27 +11,25 @@ export default () => {
             <p className="sub-title mb-5">Alquranqu</p>
             <h1 className="auth-title flex"><FaUserCheck className="mr-2 mt-3"/> Daftar</h1>
             <div className="input-group">
-                <label
-                htmlFor="fullname"
-                className="input-label"
-                >masukan nama lengkap</label>
-                <Input/>
+                <Input text="name"/>
+                <Label
+                inputFor="fullname"
+                >masukan nama lengkap</Label>
             </div>
             <div className="input-group">
-                <label
-                htmlFor="username"
-                className="input-label"
-                >masukan nama pengguna</label>
-                <Input/>
+                <Input text="name"/>
+                <Label
+                inputFor="username"
+                >masukan nama pengguna</Label>
             </div>
             <div className="input-group">
-                <label
-                htmlFor="username"
-                className="input-label"
-                >masukan password</label>
                 <Input
+                text="name"
                 type="password"
                 />
+                <Label
+                inputFor="password"
+                >masukan password</Label>
             </div>
             <div className="px-5 w-full">
                 <Button>Daftar</Button>
