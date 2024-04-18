@@ -2,7 +2,7 @@ import Input from '.././Elements/Input.tsx';
 import Button from '.././Elements/Button.tsx';
 import Label from '.././Elements/Label.tsx';
 import { nameSchema, usernameSchema, passwordSchema } from '../.././service/ZodValidation.ts';
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { FaUserCheck } from 'react-icons/fa6';
 import { MdLogin } from "react-icons/md";
 import { Link } from 'react-router-dom';
@@ -77,7 +77,7 @@ function Title({type}: {type?: string}) {
 function NameInput({type}: {type?: string}) {
     if(type === "daftar") {
         const [name, setName] = useState<string>("masukan nama lengkap");
-        const nameChange = (e: any) => {
+        const nameChange = (e: ChangeEvent<HTMLInputElement>): void => {
             alert(e.target.value)
         }
         return (
