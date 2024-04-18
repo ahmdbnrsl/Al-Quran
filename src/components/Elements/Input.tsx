@@ -1,10 +1,12 @@
+import { ChangeEventHandler } from 'react';
 export default (
-    {min, max, type, text, identify}: {
+    {min, max, type, text, identify, onChanges}: {
         min?: number,
         max?: number,
         type?: string,
         text?: string,
-        identify?: string
+        identify?: string,
+        onChanges?: ChangeEventHandler<HTMLInputElement>
     }) => {
     return (
         <input
@@ -15,6 +17,8 @@ export default (
         placeholder={text}
         id={identify}
         name={identify}
+        onChange={onChanges}
+        required
         />
     )
 }
