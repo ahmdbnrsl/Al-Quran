@@ -1,7 +1,7 @@
 import Input from '.././Elements/Input.tsx';
 import Button from '.././Elements/Button.tsx';
 import Label from '.././Elements/Label.tsx';
-import { nameSchema, usernameSchema, passwordSchema } from '../.././service/ZodValidation.ts';
+import { validate } from '../.././service/Validation/EventChange.ts';
 import { useState, ChangeEvent } from 'react';
 import { FaUserCheck } from 'react-icons/fa6';
 import { MdLogin } from "react-icons/md";
@@ -9,6 +9,10 @@ import { Link } from 'react-router-dom';
 import { ZodError } from 'zod';
 
 export default ({type}: {type?: string}) => {
+    const [username, setUsername] = useState<string>("Masukan nama pengguna");
+    const [password, setPassword] = useState<string>("Masukan kata sandi");
+    const usernameChange = (e: ChangeEvent<HTMLInputElement>): void => validate(e, "username", (msg: string): void => setUsername(msg))
+    const passwordChange = (e: ChangeEvent<HTMLInputElement>): void => validate(e, "password", (msg: string): void => setPassword(msg))
     return (
         <form className="auth-box">
             <h1 className="title">القرآن الكريم</h1>
@@ -19,20 +23,22 @@ export default ({type}: {type?: string}) => {
                 <Input 
                 text="name"
                 identify="username"
+                onChanges={usernameChange}
                 />
                 <Label
                 inputFor="username"
-                >masukan nama pengguna</Label>
+                >{username}</Label>
             </div>
             <div className="input-group">
                 <Input
                 text="name"
                 type="password"
                 identify="password"
+                onChanges={passwordChange}
                 />
                 <Label
                 inputFor="password"
-                >masukan password</Label>
+                >{password}</Label>
             </div>
             <ButtonType type={type}/>
             <Footer type={type}/>
@@ -76,10 +82,8 @@ function Title({type}: {type?: string}) {
 
 function NameInput({type}: {type?: string}) {
     if(type === "daftar") {
-        const [name, setName] = useState<string>("masukan nama lengkap");
-        const nameChange = (e: ChangeEvent<HTMLInputElement>): void => {
-            alert(e.target.value)
-        }
+        const [name, setName] = useState<string>("Masukan nama lengkap");
+        const nameChange = (e: ChangeEvent<HTMLInputElement>): void => validate(e, "name", (msg: string): void => setName(msg));
         return (
             <div className="input-group">
                 <Input 
