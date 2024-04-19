@@ -2,19 +2,27 @@ import Input from '.././Elements/Input.tsx';
 import Button from '.././Elements/Button.tsx';
 import Label from '.././Elements/Label.tsx';
 import { validate } from '../.././service/Validation/EventChange.ts';
-import { useState, ChangeEvent } from 'react';
+import { submitValidate } from '../.././service/Validation/EventSubmit.ts';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { FaUserCheck } from 'react-icons/fa6';
 import { MdLogin } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { ZodError } from 'zod';
 
 export default ({type}: {type?: string}) => {
+    
     const [username, setUsername] = useState<string>("Masukan nama pengguna");
     const [password, setPassword] = useState<string>("Masukan kata sandi");
-    const usernameChange = (e: ChangeEvent<HTMLInputElement>): void => validate(e, "username", (msg: string): void => setUsername(msg))
-    const passwordChange = (e: ChangeEvent<HTMLInputElement>): void => validate(e, "password", (msg: string): void => setPassword(msg))
+    
+    const usernameChange = (e: ChangeEvent<HTMLInputElement>): void => validate(e, "username", (msg: string): void => setUsername(msg));
+    const passwordChange = (e: ChangeEvent<HTMLInputElement>): void => validate(e, "password", (msg: string): void => setPassword(msg));
+    
+    const HandleSubmit = (e: FormEvent<HTMLInputElement | HTMLFormElement>): void => {
+        e.preventDefault();
+        submitValidate(e, type);
+    }
     return (
-        <form className="auth-box">
+        <form className="auth-box" onSubmit={HandleSubmit}>
             <h1 className="title">القرآن الكريم</h1>
             <p className="sub-title mb-5">Alquranqu</p>
             <Title type={type}/>
@@ -90,7 +98,6 @@ function NameInput({type}: {type?: string}) {
                 text="name"
                 identify="fullname"
                 onChanges={nameChange}
-                min={4}
                 />
                 <Label
                 inputFor="fullname"
