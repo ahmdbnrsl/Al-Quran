@@ -3,6 +3,8 @@ import Button from '.././Elements/Button.tsx';
 import Label from '.././Elements/Label.tsx';
 import { validate } from '../.././service/Validation/EventChange.ts';
 import { submitValidate } from '../.././service/Validation/EventSubmit.ts';
+import { login } from '../.././service/Auth/Login.ts';
+import { register } from '../.././service/Auth/Register.ts';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { FaUserCheck } from 'react-icons/fa6';
 import { MdLogin } from "react-icons/md";
@@ -19,8 +21,16 @@ export default ({type}: {type?: string}) => {
     
     const HandleSubmit = (e: FormEvent<HTMLInputElement | HTMLFormElement>): void => {
         e.preventDefault();
-        submitValidate(e, type);
+        const isValidate = submitValidate(e, type);
+        if(isValidate) {
+            if(type === "daftar") {
+                register();
+            } else {
+                login();
+            }
+        }
     }
+    
     return (
         <form className="auth-box" onSubmit={HandleSubmit}>
             <h1 className="title">القرآن الكريم</h1>

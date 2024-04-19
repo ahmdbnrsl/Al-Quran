@@ -5,7 +5,7 @@ import { registerSchema, loginSchema } from './ZodValidation.ts';
 export const submitValidate = (
     e: FormEvent<HTMLInputElement | HTMLFormElement>,
     type?: string
-) => {
+): boolean | undefined => {
     interface Data extends EventTarget {
         fullname: HTMLInputElement;
         username: HTMLInputElement;
@@ -25,6 +25,7 @@ export const submitValidate = (
         
         try {
             registerSchema.parse(data);
+            return true;
         } catch (error) {
             if(error instanceof ZodError) {
                 const msg = JSON.parse(error.message);
@@ -35,6 +36,7 @@ export const submitValidate = (
                 } else if(msg[0].path[0] === "password") {
                     ev.password.focus();
                 }
+                return false;
             }
         }
     } else {
@@ -48,6 +50,7 @@ export const submitValidate = (
         
         try {
             loginSchema.parse(data);
+            return true;
         } catch (error) {
             if(error instanceof ZodError) {
                 const msg = JSON.parse(error.message);
@@ -56,6 +59,7 @@ export const submitValidate = (
                 } else if(msg[0].path[0] === "password") {
                     ev.password.focus();
                 }
+                return false;
             }
         }
     }
