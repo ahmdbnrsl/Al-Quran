@@ -24,7 +24,7 @@ export default ({type}: {type?: string}) => {
         const isValidate = submitValidate(e, type);
         if(isValidate) {
             if(type === "daftar") {
-                register();
+                register(e);
             } else {
                 login();
             }
