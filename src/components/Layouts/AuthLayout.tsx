@@ -1,6 +1,7 @@
 import Input from '.././Elements/Input.tsx';
 import Button from '.././Elements/Button.tsx';
 import Label from '.././Elements/Label.tsx';
+import Loading from '.././Elements/Loading.tsx';
 import { validate } from '../.././service/Validation/EventChange.ts';
 import { submitValidate } from '../.././service/Validation/EventSubmit.ts';
 import { login } from '../.././service/Auth/Login.ts';
@@ -15,6 +16,8 @@ export default ({type}: {type?: string}) => {
     
     const [username, setUsername] = useState<string>("Masukan nama pengguna");
     const [password, setPassword] = useState<string>("Masukan kata sandi");
+    const [btnhidden, setBtnHidden] = useState<boolean>(false);
+    const [loadingBtn, setLoadingBtn] = useState<boolean>(true);
     
     const usernameChange = (e: ChangeEvent<HTMLInputElement>): void => validate(e, "username", (msg: string): void => setUsername(msg));
     const passwordChange = (e: ChangeEvent<HTMLInputElement>): void => validate(e, "password", (msg: string): void => setPassword(msg));
@@ -24,7 +27,12 @@ export default ({type}: {type?: string}) => {
         const isValidate = submitValidate(e, type);
         if(isValidate) {
             if(type === "daftar") {
-                register(e);
+                setBtnHidden(true);
+                setLoadingBtn(false);
+                register(e, () => {
+                    setBtnHidden(false);
+                    setLoadingBtn(true);
+                });
             } else {
                 login();
             }
@@ -58,26 +66,20 @@ export default ({type}: {type?: string}) => {
                 inputFor="password"
                 >{password}</Label>
             </div>
-            <ButtonType type={type}/>
+            <div className="px-5 w-full">
+                <Button type="submit" isHidden={btnhidden}>
+                    {
+                        type === "daftar" ? "Daftar" : "Masuk"
+                    }
+                </Button>
+                <Button type="button" isHidden={loadingBtn}>
+                    <Loading/>
+                    Memproses...
+                </Button>
+            </div>
             <Footer type={type}/>
         </form>
     )
-}
-
-function ButtonType({type}: {type?: string}) {
-    if(type === "daftar") {
-        return (
-            <div className="px-5 w-full">
-                <Button>Daftar</Button>
-            </div>
-        )
-    } else {
-        return (
-            <div className="px-5 w-full">
-                <Button>Masuk</Button>
-            </div>
-        )
-    }
 }
 
 function Title({type}: {type?: string}) {

@@ -4,7 +4,10 @@ import { FormEvent } from 'react';
 const authToken: string = import.meta.env.VITE_AUTH;
 const urlApi: string = import.meta.env.VITE_URLAPI;
 
-export const register = (e: FormEvent<HTMLInputElement | HTMLFormElement>): void => {
+export const register = (
+    e: FormEvent<HTMLInputElement | HTMLFormElement>,
+    callback: () => void
+): void => {
     interface Data extends EventTarget {
         fullname: HTMLInputElement;
         username: HTMLInputElement;
@@ -32,6 +35,12 @@ export const register = (e: FormEvent<HTMLInputElement | HTMLFormElement>): void
     }
     axios
     .request(options)
-    .then((res) => alert(JSON.stringify(res.data)))
-    .catch(err => alert(err));
+    .then((res) => {
+        alert(res.data);
+        callback();
+    })
+    .catch(err => {
+        alert(err.message)
+        callback();
+    });
 }

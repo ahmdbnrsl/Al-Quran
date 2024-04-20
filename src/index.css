@@ -77,7 +77,7 @@
         @apply w-full font-normal outline-0 bg-zinc-100 px-4 py-2 border-2 border-zinc-200 rounded-xl text-zinc-500 focus:border-teal-500 active:border-teal-500 focus:font-medium active:font-medium focus:text-teal-500 active:text-teal-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:focus:border-orange-500 dark:active:border-orange-500 dark:focus:text-orange-500 dark:active:text-orange-500
     }
     .btn {
-        @apply font-mulishsemibold mt-6 w-full text-zinc-50 py-2 px-5 text-sm rounded-xl bg-teal-500 dark:text-zinc-950 dark:bg-orange-500
+        @apply flex justify-center font-mulishsemibold mt-6 w-full text-zinc-50 py-2 px-5 text-sm rounded-xl bg-teal-500 dark:text-zinc-950 dark:bg-orange-500
     }
     .foot-auth {
         @apply mt-8 mb-5 px-5 font-mulish text-zinc-500 font-normal text-sm dark:text-zinc-300
