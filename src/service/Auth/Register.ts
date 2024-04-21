@@ -6,7 +6,7 @@ const urlApi: string = import.meta.env.VITE_URLAPI;
 
 export const register = (
     e: FormEvent<HTMLInputElement | HTMLFormElement>,
-    callback: () => void
+    callback: (msg: string) => void
 ): void => {
     interface Data extends EventTarget {
         fullname: HTMLInputElement;
@@ -35,12 +35,15 @@ export const register = (
     }
     axios
     .request(options)
-    .then((res) => {
-        alert(res.data);
-        callback();
+    .then(() => {
+        callback("Berhasil mendaftar");
+        window.location.href = "/masuk";
     })
     .catch(err => {
-        alert(err.message)
-        callback();
+        if(err.response.status === 422) {
+            callback("Nama pengguna telah digunakan!");
+        } else {
+            callback("Terjadi kesalahan");
+        }
     });
 }

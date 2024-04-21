@@ -6,7 +6,7 @@ import { validate } from '../.././service/Validation/EventChange.ts';
 import { submitValidate } from '../.././service/Validation/EventSubmit.ts';
 import { login } from '../.././service/Auth/Login.ts';
 import { register } from '../.././service/Auth/Register.ts';
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { FaUserCheck } from 'react-icons/fa6';
 import { MdLogin } from "react-icons/md";
 import { Link } from 'react-router-dom';
@@ -14,10 +14,18 @@ import { ZodError } from 'zod';
 
 export default ({type}: {type?: string}) => {
     
+    useEffect(() => {
+        const authToken: string | null = window.localStorage.getItem("auth_token");
+        if(authToken) {
+            window.location.href = '/home';
+        }
+    }, []);
+    
     const [username, setUsername] = useState<string>("Masukan nama pengguna");
     const [password, setPassword] = useState<string>("Masukan kata sandi");
     const [btnhidden, setBtnHidden] = useState<boolean>(false);
     const [loadingBtn, setLoadingBtn] = useState<boolean>(true);
+    const [message, setMessage] = useState<string>("");
     
     const usernameChange = (e: ChangeEvent<HTMLInputElement>): void => validate(e, "username", (msg: string): void => setUsername(msg));
     const passwordChange = (e: ChangeEvent<HTMLInputElement>): void => validate(e, "password", (msg: string): void => setPassword(msg));
@@ -29,12 +37,19 @@ export default ({type}: {type?: string}) => {
             if(type === "daftar") {
                 setBtnHidden(true);
                 setLoadingBtn(false);
-                register(e, () => {
+                register(e, (msg: string) => {
                     setBtnHidden(false);
                     setLoadingBtn(true);
+                    setMessage(msg);
                 });
             } else {
-                login();
+                setBtnHidden(true);
+                setLoadingBtn(false);
+                login(e, (msg: string) => {
+                    setBtnHidden(false);
+                    setLoadingBtn(true);
+                    setMessage(msg);
+                });
             }
         }
     }
@@ -44,6 +59,9 @@ export default ({type}: {type?: string}) => {
             <h1 className="title">القرآن الكريم</h1>
             <p className="sub-title mb-5">Alquranqu</p>
             <Title type={type}/>
+            {
+                message && <p className="message">{message}</p>
+            }
             <NameInput type={type}/>
             <div className="input-group">
                 <Input 
