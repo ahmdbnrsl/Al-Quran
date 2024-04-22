@@ -53,10 +53,16 @@
         @apply selection:text-zinc-100 selection:bg-teal-500 dark:selection:text-zinc-900 dark:selection:bg-orange-500
     }
     .index-box {
-        @apply flex flex-col bg-center bg-no-repeat bg-cover bg-zinc-50 w-full min-h-screen dark:bg-zinc-900
+        @apply flex flex-col bg-center bg-no-repeat bg-cover bg-zinc-100 w-full min-h-screen dark:bg-zinc-900
     }
     .hero-box {
-        @apply bg-cover bg-center bg-no-repeat p-5 flex flex-col justify-center w-full bg-hero bg-teal-500 dark:bg-orange-500;
+        @apply gap-5 bg-cover bg-center bg-no-repeat p-5 flex flex-col justify-center items-center w-full bg-hero bg-teal-500 dark:bg-orange-500;
+    }
+    .history-box {
+        @apply w-full max-w-2xl flex flex-col bg-teal-800 rounded-xl p-5 dark:bg-orange-800
+    }
+    .nav-box {
+        @apply flex shadow-2xl shadow-zinc-200 justify-between items-center sticky top-0 px-5 py-3 w-full bg-zinc-50 dark:bg-zinc-800 dark:shadow-zinc-950
     }
     .main-box {
         @apply bg-center bg-no-repeat bg-cover bg-light-theme bg-zinc-50 p-5 w-full min-h-screen dark:bg-dark-theme dark:bg-zinc-900
@@ -69,6 +75,9 @@
     }
     .sub-title {
         @apply -mt-4 w-full text-center font-mukadimah pb-8 border-b border-zinc-200 text-3xl font-medium text-zinc-600 dark:text-zinc-300 dark:border-zinc-800
+    }
+    .hero-title {
+        @apply -mt-8 text-zinc-50 text-4xl font-mukadimah
     }
     .auth-title {
         @apply px-5 pb-3 w-full text-3xl font-mukadimah text-teal-500 dark:text-orange-500
@@ -84,6 +93,9 @@
     }
     .btn {
         @apply flex justify-center font-mulishsemibold mt-6 w-full text-zinc-50 py-2 px-5 text-sm rounded-xl bg-teal-500 dark:text-zinc-950 dark:bg-orange-500
+    }
+    .btn-bar {
+        @apply p-3 text-xl text-teal-500 rounded hover:bg-zinc-200 active:bg-zinc-200 dark:text-orange-500 dark:hover:bg-zinc-900 dark:active:bg-zinc-900
     }
     .foot-auth {
         @apply mt-8 mb-5 px-5 font-mulish text-zinc-500 font-normal text-sm dark:text-zinc-300

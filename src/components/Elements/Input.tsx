@@ -1,14 +1,15 @@
 import { ChangeEventHandler } from 'react';
 export default (
-    {type, text, identify, onChanges}: {
+    {type, text, identify, onChanges, styles}: {
         type?: string,
         text?: string,
         identify?: string,
-        onChanges?: ChangeEventHandler<HTMLInputElement>
+        onChanges?: ChangeEventHandler<HTMLInputElement>,
+        styles?: string
     }) => {
     return (
         <input
-        className="peer input placeholder:text-transparent"
+        className={`peer input placeholder:text-zinc-500 ${styles}`}
         type={type ? type : 'text'}
         placeholder={text}
         id={identify}
