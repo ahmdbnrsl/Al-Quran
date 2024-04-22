@@ -18,6 +18,7 @@ export default {
       backgroundImage: {
         'dark-theme': "url('/background/darkTheme.jpg')",
         'light-theme': "url('/background/lightTheme.jpg')",
+        'hero': "url('/background/hero.png')"
       }
     },
   },

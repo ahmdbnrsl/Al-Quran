@@ -1,6 +1,9 @@
 import Button from '.././components/Elements/Button.tsx';
+import ListSurahLayout from '.././components/Layouts/ListSurahLayout.tsx';
 export default () => {
     return (
-        <div className="w-full min-h-screen bg-gray-50 dark:bg-gray-900"><Button type="button">Hello World</Button></div>
+        <div className="index-box">
+          <ListSurahLayout/>
+        </div>
     )
 }

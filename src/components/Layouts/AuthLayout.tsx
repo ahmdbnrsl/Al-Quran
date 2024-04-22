@@ -10,14 +10,16 @@ import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { FaUserCheck } from 'react-icons/fa6';
 import { MdLogin } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ZodError } from 'zod';
 
 export default ({type}: {type?: string}) => {
+    const navigate = useNavigate();
     
     useEffect(() => {
         const authToken: string | null = window.localStorage.getItem("auth_token");
         if(authToken) {
-            window.location.href = '/home';
+            navigate('/surah');
         }
     }, []);
     
@@ -37,18 +39,20 @@ export default ({type}: {type?: string}) => {
             if(type === "daftar") {
                 setBtnHidden(true);
                 setLoadingBtn(false);
-                register(e, (msg: string) => {
+                register(e, (status: number, msg: string) => {
                     setBtnHidden(false);
                     setLoadingBtn(true);
                     setMessage(msg);
+                    if(status === 200) navigate('/masuk');
                 });
             } else {
                 setBtnHidden(true);
                 setLoadingBtn(false);
-                login(e, (msg: string) => {
+                login(e, (status: number, msg: string) => {
                     setBtnHidden(false);
                     setLoadingBtn(true);
                     setMessage(msg);
+                    if(status === 200) navigate('/surah');
                 });
             }
         }
@@ -103,14 +107,14 @@ export default ({type}: {type?: string}) => {
 function Title({type}: {type?: string}) {
     if(type === "daftar") {
         return (
-            <h1 className="auth-title ml-6 flex">
+            <h1 className="auth-title flex">
                 <FaUserCheck className="mr-2 mt-4 text-2xl"/>
                 Daftar
             </h1>
         )
     } else {
         return (
-            <h1 className="auth-title ml-6 flex">
+            <h1 className="auth-title flex">
                 <MdLogin className="mr-2 mt-4 text-2xl"/>
                 Masuk
             </h1>

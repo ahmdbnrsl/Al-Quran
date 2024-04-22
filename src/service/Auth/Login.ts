@@ -6,7 +6,7 @@ const urlApi: string = import.meta.env.VITE_URLAPI;
 
 export const login = (
     e: FormEvent<HTMLInputElement | HTMLFormElement>,
-    callback: (msg: string) => void
+    callback: (status: number, msg: string) => void
 ) => {
     interface Data extends EventTarget {
         username: HTMLInputElement;
@@ -33,15 +33,14 @@ export const login = (
     axios
     .request(options)
     .then((res) => {
-        callback("Berhasil masuk");
         window.localStorage.setItem("auth_token", res.data.token)
-        window.location.href = "/home";
+        callback(res.status, "Berhasil masuk");
     })
     .catch(err => {
         if(err.response.status === 422) {
-            callback("Nama pengguna atau kata sandi salah!");
+            callback(err.response.status, "Nama pengguna atau kata sandi salah!");
         } else {
-            callback("Terjadi kesalahan");
+            callback(err.response.status, "Terjadi kesalahan");
         }
     });
 }

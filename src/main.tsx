@@ -11,12 +11,12 @@ import 'react-loading-skeleton/dist/skeleton.css'
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <ListSurah/>,
+        element: <App/>,
         errorElement: <p>404</p>
     },
     {
-        path: "/tes",
-        element: <App/>
+        path: "/surah",
+        element: <ListSurah/>
     },
     {
         path: "/daftar",

@@ -52,6 +52,12 @@
     * {
         @apply selection:text-zinc-100 selection:bg-teal-500 dark:selection:text-zinc-900 dark:selection:bg-orange-500
     }
+    .index-box {
+        @apply flex flex-col bg-center bg-no-repeat bg-cover bg-zinc-50 w-full min-h-screen dark:bg-zinc-900
+    }
+    .hero-box {
+        @apply bg-cover bg-center bg-no-repeat p-5 flex flex-col justify-center w-full bg-hero bg-teal-500 dark:bg-orange-500;
+    }
     .main-box {
         @apply bg-center bg-no-repeat bg-cover bg-light-theme bg-zinc-50 p-5 w-full min-h-screen dark:bg-dark-theme dark:bg-zinc-900
     }
@@ -86,7 +92,7 @@
         @apply font-mulishsemibold text-teal-500 dark:text-orange-500
     }
     .message {
-        @apply mb-3 px-5 ml-6 font-mulishsemibold text-sm w-full text-teal-500 dark:text-orange-500
+        @apply mb-3 px-5 font-mulishsemibold text-sm w-full text-teal-500 dark:text-orange-500
     }
 }
 
