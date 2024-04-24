@@ -16,8 +16,12 @@ import { ZodError } from 'zod';
 export default ({type}: {type?: string}) => {
     const navigate = useNavigate();
     
+    const getCookieValue = (name: string) => (
+        document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
+    );
+    
     useEffect(() => {
-        const authToken: string | null = window.localStorage.getItem("auth_token");
+        const authToken: string | null = getCookieValue("authToken");
         if(authToken) {
             navigate('/surah');
         }

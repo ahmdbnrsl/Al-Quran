@@ -33,7 +33,8 @@ export const login = (
     axios
     .request(options)
     .then((res) => {
-        window.localStorage.setItem("auth_token", res.data.token)
+        const date: string = new Date(Date.now() + 1000*60*60*24*10).toUTCString();
+        document.cookie = `authToken=${res.data.token}; expires=${date};`
         callback(res.status, "Berhasil masuk");
     })
     .catch(err => {
