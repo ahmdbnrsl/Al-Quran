@@ -1,6 +1,8 @@
 import Input from '.././Elements/Input.tsx';
 import { useState, MouseEvent } from 'react';
 import { FaCircleUser } from "react-icons/fa6";
+import { HiMiniBars3BottomRight } from "react-icons/hi2";
+import Button from '.././Elements/Button.tsx';
 import { RxCross2 } from "react-icons/rx";
 
 export default () => {
@@ -22,8 +24,8 @@ export default () => {
                     </div>
                 }
             </div>
-            <div className="nav-box justify-center">
-                <div className="nav-box max-w-2xl pt-1 px-0 pb-0 shadow-none">
+            <div className="nav-box items-center flex-col">
+                <div className="nav-box max-w-2xl pt-1 px-0 pb-0 shadow-none gap-3">
                     <div className="w-full max-w-xs">
                         <Input 
                         text="Cari surah"
@@ -36,16 +38,24 @@ export default () => {
                     onClick={(): void => {
                         setHidden(true);
                     }}>
-                        <FaCircleUser/>
+                        <HiMiniBars3BottomRight/>
                     </button>
                     <button
                     type="button"
-                    className={`btn-bar bg-zinc-200 dark:bg-zinc-900 ${hidden ? 'visible' : 'hidden'}`}
+                    className={`btn-bar ${hidden ? 'visible' : 'hidden'}`}
                     onClick={(): void => {
                         setHidden(false);
                     }}>
                         <RxCross2/>
                     </button>
+                </div>
+                <div className={`modal-container ${hidden ? 'visible' : 'hidden'}`}>
+                    <div className="modal mx-3">
+                        <FaCircleUser className="mt-5 text-6xl text-zinc-200 dark:text-zinc-600"/>
+                        <h1 className="name">Ahmad Beni Rusli</h1>
+                        <p className="username">@ahmadbeni2727</p>
+                        <Button type="button">Keluar</Button>
+                    </div>
                 </div>
             </div>
         </>

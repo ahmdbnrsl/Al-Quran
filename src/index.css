@@ -53,7 +53,7 @@
         @apply selection:text-zinc-100 selection:bg-teal-500 dark:selection:text-zinc-900 dark:selection:bg-orange-500
     }
     .index-box {
-        @apply flex flex-col bg-center bg-no-repeat bg-cover bg-zinc-100 w-full min-h-screen dark:bg-zinc-900
+        @apply flex flex-col items-center bg-center bg-no-repeat bg-cover bg-zinc-100 w-full min-h-screen dark:bg-zinc-900
     }
     .hero-box {
         @apply gap-5 bg-cover bg-center bg-no-repeat p-5 flex flex-col justify-center items-center w-full bg-hero bg-teal-500 dark:bg-orange-500;
@@ -92,10 +92,10 @@
         @apply w-full font-normal outline-0 bg-zinc-100 px-4 py-2 border-2 border-zinc-200 rounded-xl text-zinc-500 focus:border-teal-500 active:border-teal-500 focus:font-medium active:font-medium focus:text-teal-500 active:text-teal-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:focus:border-orange-500 dark:active:border-orange-500 dark:focus:text-orange-500 dark:active:text-orange-500
     }
     .btn {
-        @apply flex justify-center font-mulishsemibold mt-6 w-full text-zinc-50 py-2 px-5 text-sm rounded-xl bg-teal-500 dark:text-zinc-950 dark:bg-orange-500
+        @apply cursor-pointer flex justify-center font-mulishsemibold mt-6 w-full text-zinc-50 py-2 px-5 text-sm rounded-xl bg-teal-500 dark:text-zinc-950 dark:bg-orange-500
     }
     .btn-bar {
-        @apply p-2 text-3xl text-teal-500 rounded-full hover:bg-zinc-200 active:bg-zinc-200 dark:text-orange-500 dark:hover:bg-zinc-900 dark:active:bg-zinc-900
+        @apply cursor-pointer p-2 text-3xl text-teal-500 rounded-full hover:bg-zinc-200 active:bg-zinc-200 dark:text-orange-500 dark:hover:bg-zinc-900 dark:active:bg-zinc-900
     }
     .foot-auth {
         @apply mt-8 mb-5 px-5 font-mulish text-zinc-500 font-normal text-sm dark:text-zinc-300
@@ -105,6 +105,18 @@
     }
     .message {
         @apply mb-3 px-5 font-mulishsemibold text-sm w-full text-teal-500 dark:text-orange-500
+    }
+    .modal-container {
+        @apply z-50 absolute top-20 w-full max-w-2xl flex justify-end mt-2
+    }
+    .modal {
+        @apply flex flex-col items-center shadow-2xl shadow-zinc-200 w-full max-w-xs rounded-2xl bg-zinc-50 dark:bg-zinc-800 dark:shadow-zinc-950 py-3 px-5
+    }
+    .name {
+        @apply mt-4 font-mulishsemibold text-teal-500 text-xl dark:text-orange-500
+    }
+    .username {
+        @apply -mt-1 font-mulish text-sm text-zinc-400 dark:text-zinc-400
     }
 }
 
