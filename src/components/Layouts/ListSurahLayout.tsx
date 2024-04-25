@@ -15,11 +15,18 @@ export default () => {
     const [surahs, setSurahs] = useState<ResultListSurah[]>([]);
     const [loadingSurah, setLoadingSurah] = useState<boolean>(true);
     
+    const getSurah: string | null = window.localStorage.getItem('list_surah');
     useEffect(() => {
-        listSurah((result: ResultListSurah[]): void => {
+        if(!getSurah) {
+            listSurah((result: ResultListSurah[]): void => {
+                setLoadingSurah(false);
+                setSurahs(result);
+                window.localStorage.setItem('list_surah', JSON.stringify(result));
+            });
+        } else {
+            setSurahs(JSON.parse(getSurah));
             setLoadingSurah(false);
-            setSurahs(result);
-        });
+        }
     }, [surahs])
     
     return (
