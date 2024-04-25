@@ -1,16 +1,17 @@
 import Input from '.././Elements/Input.tsx';
-import { useState, useEffect, MouseEvent } from 'react';
+import { useState, useEffect, MouseEvent, ChangeEvent } from 'react';
 import { FaCircleUser } from "react-icons/fa6";
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
 import Button from '.././Elements/Button.tsx';
 import { RxCross2 } from "react-icons/rx";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { listSurah } from '../.././service/FetchData/ListSurah.service.ts';
 import { ResultListSurah, DetailList } from '../.././types/ResultListSurah.interface.ts';
 import ListSurahSkeleton from '.././Skeletons/ListSurah.skeleton.tsx';
 
 export default () => {
     const recentRead: boolean = false;
+    const [searchParams, setSearchParams] = useSearchParams();
     const [hidden, setHidden] = useState<boolean>(false);
     const [surahs, setSurahs] = useState<ResultListSurah[]>([]);
     const [loadingSurah, setLoadingSurah] = useState<boolean>(true);
@@ -27,7 +28,20 @@ export default () => {
             setSurahs(JSON.parse(getSurah));
             setLoadingSurah(false);
         }
-    }, [surahs])
+    }, [surahs]);
+    
+    const SearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        if (e.target.value !== "") {
+            searchParams.set("nama", e.target.value);
+            setSearchParams(searchParams);
+        } else {
+            searchParams.delete("nama");
+            setSearchParams(searchParams);
+        }
+    }
+    
+    const query = searchParams.get("nama");
+    const filteredSurah = surahs?.filter((surah: DetailList): boolean | undefined => surah?.nama_latin?.toLowerCase().includes(query?.toLowerCase() || ""));
     
     return (
         <>
@@ -50,6 +64,7 @@ export default () => {
                         <Input 
                         text="Cari surah"
                         identify="search"
+                        onChanges={SearchChange}
                         />
                     </div>
                     <button
@@ -86,11 +101,11 @@ export default () => {
                         })
                     }
                     {
-                        !loadingSurah && surahs?.map((surah: DetailList) => {
+                        !loadingSurah && filteredSurah?.length > 0 ? filteredSurah?.map((surah: DetailList) => {
                             return (
                                 <BoxSurah surah={surah}/>
                             )
-                        })
+                        }) : <p className="text-lg mt-5 text-teal-500 dark:text-orange-500">Surah tidak ditemukan.</p>
                     }
                 </div>
             </div>
