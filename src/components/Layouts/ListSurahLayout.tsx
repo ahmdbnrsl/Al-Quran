@@ -1,13 +1,26 @@
 import Input from '.././Elements/Input.tsx';
-import { useState, MouseEvent } from 'react';
+import { useState, useEffect, MouseEvent } from 'react';
 import { FaCircleUser } from "react-icons/fa6";
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
 import Button from '.././Elements/Button.tsx';
 import { RxCross2 } from "react-icons/rx";
+import { Link } from "react-router-dom";
+import { listSurah } from '../.././service/FetchData/ListSurah.service.ts';
+import { ResultListSurah, DetailList } from '../.././types/ResultListSurah.interface.ts';
+import ListSurahSkeleton from '.././Skeletons/ListSurah.skeleton.tsx';
 
 export default () => {
     const recentRead: boolean = false;
     const [hidden, setHidden] = useState<boolean>(false);
+    const [surahs, setSurahs] = useState<ResultListSurah[]>([]);
+    const [loadingSurah, setLoadingSurah] = useState<boolean>(true);
+    
+    useEffect(() => {
+        listSurah((result: ResultListSurah[]): void => {
+            setLoadingSurah(false);
+            setSurahs(result);
+        });
+    }, [surahs])
     
     return (
         <>
@@ -58,6 +71,44 @@ export default () => {
                     </div>
                 </div>
             </div>
+            <div className="list-surah-container">
+                <div className="list-surah">
+                    {
+                        loadingSurah && Array(114).fill(0).map(() => {
+                            return <ListSurahSkeleton/>
+                        })
+                    }
+                    {
+                        !loadingSurah && surahs?.map((surah: DetailList) => {
+                            return (
+                                <BoxSurah surah={surah}/>
+                            )
+                        })
+                    }
+                </div>
+            </div>
         </>
+    )
+}
+
+
+const BoxSurah = ({surah}: {surah: DetailList}) => {
+    return (
+        <Link
+        to={`/${surah?.nama_latin}`}
+        className="surah-box"
+        >
+            <div className="flex items-center gap-3">
+                <div className="icon-star">
+                    ۞
+                </div>
+                <div className="text-left">
+                    <p className="nama_surah">{surah?.nomor}. {surah?.nama_latin}</p>
+                    <p className="arti_surah">{surah?.arti}</p>
+                    <p className="arti_surah">{surah?.tempat_turun === 'mekah' ? 'makkiyah' : 'madaniyah'} | {surah?.jumlah_ayat} Ayat</p>
+                </div>
+            </div>
+            <div className="nama_surah_ar">{surah?.nama}</div>
+        </Link>
     )
 }
