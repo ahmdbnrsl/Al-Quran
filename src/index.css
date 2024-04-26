@@ -95,7 +95,7 @@
         @apply cursor-pointer flex justify-center font-mulishsemibold mt-6 w-full text-zinc-50 py-2 px-5 text-sm rounded-xl bg-teal-500 dark:text-zinc-950 dark:bg-orange-500
     }
     .btn-bar {
-        @apply cursor-pointer p-2 text-3xl text-teal-500 rounded-full hover:bg-zinc-200 active:bg-zinc-200 dark:text-orange-500 dark:hover:bg-zinc-900 dark:active:bg-zinc-900
+        @apply cursor-pointer p-2 text-3xl text-teal-500 rounded-full hover:bg-zinc-200 active:bg-zinc-200 dark:text-orange-500 dark:hover:bg-zinc-950 dark:active:bg-zinc-950
     }
     .foot-auth {
         @apply mt-8 mb-5 px-5 font-mulish text-zinc-500 font-normal text-sm dark:text-zinc-300

@@ -1,22 +1,19 @@
 import DarkImage from '/logo/dark_logo.png';
 import LightImage from '/logo/light_logo.png';
 import { Link } from 'react-router-dom';
+import {
+    FaInstagram,
+    FaXTwitter,
+    FaLinkedin,
+    FaTiktok,
+    FaGithub
+} from "react-icons/fa6";
 
 export default () => {
     const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     return (
         <div className="footer-container">
-            <div className="footer">
-                
-                <div className="flex flex-col items-center w-full">
-                    <img
-                    src={isDarkMode ? DarkImage : LightImage}
-                    width={70}
-                    height={70}
-                    />
-                    <h1 className="font-mulishsemibold text-xl -mt-3 mb-0 border-b-0 text-teal-500 dark:text-orange-500">Alquranqu</h1>
-                    <p className="text-sm font-mulish text-zinc-900 dark:text-zinc-500">© 2024 | Ahmad Beni Rusli</p>
-                </div>
+            <div className="footer mt-5">
                 <div className="flex flex-col">
                     <h1 className="footer-title">Navigasi</h1>
                     <Link to="/beranda" className="footer-navigate">Beranda</Link>
@@ -29,6 +26,56 @@ export default () => {
                     <Link to="/faq" className="footer-navigate">FAQ</Link>
                     <Link to="/privasi" className="footer-navigate">Privasi</Link>
                     <Link to="/polisi" className="footer-navigate">Polisi</Link>
+                </div>
+                <div className="flex flex-col">
+                    <h1 className="footer-title">Fitur</h1>
+                    <Link to="/surah" className="footer-navigate">Terjemah bahasa Indonesia</Link>
+                    <Link to="/surah" className="footer-navigate">Pencarian surah dan ayat</Link>
+                    <Link to="/surah" className="footer-navigate">Penandaan terakhir dibaca</Link>
+                </div>
+                <div className="flex flex-col">
+                    <h1 className="footer-title">Teknologi</h1>
+                    <Link to="https://react.dev" className="footer-navigate">React Js</Link>
+                    <Link to="https://tailwindcss.com" className="footer-navigate">Tailwind CSS</Link>
+                    <Link to="https://vitejs.com" className="footer-navigate">Vite</Link>
+                    <Link to="https://nodejs.org" className="footer-navigate">Node Js</Link>
+                    <Link to="https://typescript.com" className="footer-navigate">Typescript</Link>
+                    <Link to="https://mongodb.com" className="footer-navigate">Mongo DB</Link>
+                </div>
+                <div className="flex flex-col items-center w-full">
+                    {
+                        isDarkMode ?
+                        <img
+                        src={DarkImage}
+                        width={70}
+                        height={70}
+                        />
+                        :
+                        <img
+                        src={LightImage}
+                        width={70}
+                        height={70}
+                        />
+                    }
+                    <h1 className="font-mulishsemibold text-xl -mt-3 mb-0 border-b-0 text-teal-500 dark:text-orange-500">Alquranqu</h1>
+                    <div className="flex flex-wrap justify-center gap-4 mt-2">
+                        <Link to="https://instagram.com/ahmd_bn.tsx" className="footer-navigate text-lg">
+                            <FaInstagram/>
+                        </Link>
+                        <Link to="https://instagram.com/ahmd_bn.tsx" className="footer-navigate text-lg">
+                            <FaXTwitter/>
+                        </Link>
+                        <Link to="https://instagram.com/ahmd_bn.tsx" className="footer-navigate text-lg">
+                            <FaLinkedin/>
+                        </Link>
+                        <Link to="https://instagram.com/ahmd_bn.tsx" className="footer-navigate text-lg">
+                            <FaTiktok/>
+                        </Link>
+                        <Link to="https://instagram.com/ahmd_bn.tsx" className="footer-navigate text-lg">
+                            <FaGithub/>
+                        </Link>
+                    </div>
+                    <p className="mt-2 text-sm font-mulish text-zinc-900 dark:text-zinc-500">© 2024 | Ahmad Beni Rusli</p>
                 </div>
             </div>
         </div>

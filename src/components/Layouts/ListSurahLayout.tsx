@@ -105,7 +105,7 @@ export default () => {
                             return (
                                 <BoxSurah surah={surah}/>
                             )
-                        }) : <p className="text-lg mt-5 text-teal-500 dark:text-orange-500">Surah tidak ditemukan.</p>
+                        }) : !loadingSurah && <p className="text-lg mt-5 text-teal-500 dark:text-orange-500">Surah tidak ditemukan.</p>
                     }
                 </div>
             </div>
