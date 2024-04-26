@@ -46,7 +46,7 @@ export default () => {
     return (
         <>
             <div className="hero-box">
-                <h1 className="hero-title">Alquranqu</h1>
+                <h1 className="hero-title">القرآن الكريم</h1>
                 {
                     recentRead ?
                     <div className="history-box">
@@ -59,7 +59,7 @@ export default () => {
                 }
             </div>
             <div className="nav-box items-center flex-col">
-                <div className="nav-box max-w-2xl pt-1 px-0 pb-0 shadow-none gap-3">
+                <div className="nav-box max-w-[61.5rem] pt-1 px-0 pb-0 shadow-none gap-3">
                     <div className="w-full max-w-xs">
                         <Input 
                         text="Cari surah"
