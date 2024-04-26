@@ -8,13 +8,13 @@ export default () => {
         <div className="footer-container">
             <div className="footer">
                 
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center w-full">
                     <img
                     src={isDarkMode ? DarkImage : LightImage}
                     width={70}
                     height={70}
                     />
-                    <h1 className="font-mulishsemibold text-xl -mt-3 mb-0 border-b-0 text-zinc-800 dark:text-zinc-50">Alquranqu</h1>
+                    <h1 className="font-mulishsemibold text-xl -mt-3 mb-0 border-b-0 text-teal-500 dark:text-orange-500">Alquranqu</h1>
                     <p className="text-sm font-mulish text-zinc-900 dark:text-zinc-500">© 2024 | Ahmad Beni Rusli</p>
                 </div>
                 <div className="flex flex-col">
@@ -23,7 +23,6 @@ export default () => {
                     <Link to="/surah" className="footer-navigate">Surah</Link>
                     <Link to="/daftar" className="footer-navigate">Daftar</Link>
                     <Link to="/masuk" className="footer-navigate">Masuk</Link>
-                    <Link to="/faq" className="footer-navigate">FAQ</Link>
                 </div>
                 <div className="flex flex-col">
                     <h1 className="footer-title">Informasi</h1>
