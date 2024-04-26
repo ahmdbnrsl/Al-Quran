@@ -139,8 +139,17 @@
     .nama_surah_ar {
         @apply text-teal-500 text-3xl font-far dark:text-orange-500
     }
-    .skeletons {
-        @apply bg-zinc-200 dark:bg-zinc-800
+    .footer-container {
+        @apply w-full flex justify-center bg-zinc-50 dark:bg-zinc-900
+    }
+    .footer {
+        @apply px-5 py-10 justify-center w-full max-w-[61.5rem] flex flex-wrap gap-10
+    }
+    .footer-title {
+        @apply font-mulishsemibold text-lg -mt-3 mb-0 border-b-0 text-zinc-800 dark:text-zinc-50
+    }
+    .footer-navigate {
+        @apply text-sm font-mulish text-zinc-800 dark:text-zinc-400
     }
 }
 
