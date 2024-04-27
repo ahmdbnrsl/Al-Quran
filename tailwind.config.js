@@ -8,12 +8,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'ar': ['Arab', 'sans-serif'],
-        'far': ['formalAr', 'sans-serif'],
-        'mulish': ['Mulish', 'sans-serif'],
-        'mulishbold': ['Mulish-Bold', 'sans-serif'],
-        'mulishsemibold': ['Mulish-SemiBold', 'sans-serif'],
-        'mukadimah': ['Mukadimah', 'sans-serif']
+        'arab': ['Amiri', 'sans-serif'],
+        'kufi': ['Reem Kufi', 'sans-serif'],
+        'mulish': ['Mulish', 'sans-serif']
       },
       backgroundImage: {
         'dark-theme': "url('/background/darkTheme.jpg')",

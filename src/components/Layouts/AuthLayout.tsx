@@ -65,7 +65,6 @@ export default ({type}: {type?: string}) => {
     return (
         <form className="auth-box" onSubmit={HandleSubmit}>
             <h1 className="title">القرآن الكريم</h1>
-            <p className="sub-title mb-5">Alquranqu</p>
             <Title type={type}/>
             {
                 message && <p className="message">{message}</p>
@@ -112,14 +111,14 @@ function Title({type}: {type?: string}) {
     if(type === "daftar") {
         return (
             <h1 className="auth-title flex">
-                <FaUserCheck className="mr-2 mt-4 text-2xl"/>
+                <FaUserCheck className="mr-2 text-2xl"/>
                 Daftar
             </h1>
         )
     } else {
         return (
             <h1 className="auth-title flex">
-                <MdLogin className="mr-2 mt-4 text-2xl"/>
+                <MdLogin className="mr-2 text-2xl"/>
                 Masuk
             </h1>
         )

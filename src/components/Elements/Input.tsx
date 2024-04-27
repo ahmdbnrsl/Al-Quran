@@ -9,7 +9,7 @@ export default (
     }) => {
     return (
         <input
-        className={`peer input placeholder:text-zinc-500 ${styles}`}
+        className={`peer input placeholder:text-transparent ${styles}`}
         type={type ? type : 'text'}
         placeholder={text}
         id={identify}

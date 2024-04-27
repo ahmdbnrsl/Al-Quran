@@ -18,6 +18,16 @@ export default () => {
     
     const getSurah: string | null = window.localStorage.getItem('list_surah');
     const navigate = useNavigate();
+    const getCookieValue = (name: string) => (
+        document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
+    );
+    
+    useEffect(() => {
+        const authToken: string | null = getCookieValue("authToken");
+        if(!authToken) {
+            navigate('/masuk');
+        }
+    }, []);
     
     useEffect(() => {
         if(!getSurah) {
@@ -71,6 +81,7 @@ export default () => {
                         text="Cari surah"
                         identify="search"
                         onChanges={SearchChange}
+                        styles="placeholder:text-zinc-400 dark:placeholder:text-zinc-600"
                         />
                     </div>
                     <button

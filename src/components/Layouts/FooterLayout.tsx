@@ -57,7 +57,7 @@ export default () => {
                         height={70}
                         />
                     }
-                    <h1 className="font-mulishsemibold text-xl -mt-3 mb-0 border-b-0 text-teal-500 dark:text-orange-500">Alquranqu</h1>
+                    <h1 className="font-mulish font-black text-xl -mt-3 mb-0 border-b-0 text-teal-500 dark:text-orange-500">Alquranqu</h1>
                     <div className="flex flex-wrap justify-center gap-4 mt-2">
                         <Link to="https://instagram.com/ahmd_bn.tsx" className="footer-navigate text-lg">
                             <FaInstagram/>
