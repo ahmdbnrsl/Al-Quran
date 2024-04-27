@@ -5,7 +5,7 @@ const authToken: string = import.meta.env.VITE_AUTH;
 const urlApi: string = import.meta.env.VITE_URLAPI;
 
 export const listSurah = (
-    callback: (result: ResultListSurah[]) => void
+    callback: (result: ResultListSurah[] | undefined) => void
 ) => {
     const options = {
         url: urlApi + 'surah',
@@ -20,7 +20,7 @@ export const listSurah = (
     .then(res => {
         callback(res.data);
     })
-    .catch(err => {
-        callback(err.response.message);
+    .catch(() => {
+        callback(undefined);
     })
 }

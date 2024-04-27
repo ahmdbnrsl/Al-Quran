@@ -4,7 +4,7 @@ import { FaCircleUser } from "react-icons/fa6";
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
 import Button from '.././Elements/Button.tsx';
 import { RxCross2 } from "react-icons/rx";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { listSurah } from '../.././service/FetchData/ListSurah.service.ts';
 import { ResultListSurah, DetailList } from '../.././types/ResultListSurah.interface.ts';
 import ListSurahSkeleton from '.././Skeletons/ListSurah.skeleton.tsx';
@@ -17,12 +17,18 @@ export default () => {
     const [loadingSurah, setLoadingSurah] = useState<boolean>(true);
     
     const getSurah: string | null = window.localStorage.getItem('list_surah');
+    const navigate = useNavigate();
+    
     useEffect(() => {
         if(!getSurah) {
-            listSurah((result: ResultListSurah[]): void => {
-                setLoadingSurah(false);
-                setSurahs(result);
-                window.localStorage.setItem('list_surah', JSON.stringify(result));
+            listSurah((result: ResultListSurah[] | undefined): void => {
+                if(result !== undefined) {
+                    setSurahs(result);
+                    window.localStorage.setItem('list_surah', JSON.stringify(result));
+                    setLoadingSurah(false);
+                } else {
+                    navigate('/surah');
+                }
             });
         } else {
             setSurahs(JSON.parse(getSurah));
