@@ -7,44 +7,44 @@
     font-style: normal;
     font-display: swap;
     font-weight: 200;
-    src: local('NotoNastaliqUrdu-Regular.ttf'), url('./font/Urdu/NotoNastaliqUrdu-Regular.ttf');
-    src: url('./font/Urdu/NotoNastaliqUrdu-Regular.ttf') format('ttf');
+    src: local('NotoNastaliqUrdu-Regular.ttf'), url('/font/Urdu/NotoNastaliqUrdu-Regular.ttf');
+    src: url('/font/Urdu/NotoNastaliqUrdu-Regular.ttf') format('ttf');
   }
   @font-face {
     font-family: 'formalAr';
     font-style: normal;
     font-display: swap;
     font-weight: 200;
-    src: local('ReemKufi-Regular.ttf'), url('./font/ReemKufi/ReemKufi-Regular.ttf');
-    src: url('./font/ReemKufi/ReemKufi-Regular.ttf') format('ttf');
+    src: local('ReemKufi-Regular.ttf'), url('/font/ReemKufi/ReemKufi-Regular.ttf');
+    src: url('/font/ReemKufi/ReemKufi-Regular.ttf') format('ttf');
   }
   @font-face {
     font-family: 'Mulish';
     font-style: normal;
     font-display: swap;
-    src: local('Mulish-SemiBold.ttf'), url('./font/Mulish/Mulish-SemiBold.ttf');
-    src: url('./font/Mulish/Mulish-SemiBold.ttf') format('ttf');
+    src: local('Mulish-SemiBold.ttf'), url('/font/Mulish/Mulish-SemiBold.ttf');
+    src: url('/font/Mulish/Mulish-SemiBold.ttf') format('ttf');
   }
   @font-face {
     font-family: 'Mulish-Bold';
     font-style: normal;
     font-display: swap;
-    src: local('Mulish-Black.ttf'), url('./font/Mulish/Mulish-Black.ttf');
-    src: url('./font/Mulish/Mulish-Black.ttf') format('ttf');
+    src: local('Mulish-Black.ttf'), url('/font/Mulish/Mulish-Black.ttf');
+    src: url('/font/Mulish/Mulish-Black.ttf') format('ttf');
   }
   @font-face {
     font-family: 'Mulish-SemiBold';
     font-style: normal;
     font-display: swap;
-    src: local('Mulish-ExtraBold.ttf'), url('./font/Mulish/Mulish-ExtraBold.ttf');
-    src: url('./font/Mulish/Mulish-ExtraBold.ttf') format('ttf');
+    src: local('Mulish-ExtraBold.ttf'), url('/font/Mulish/Mulish-ExtraBold.ttf');
+    src: url('/font/Mulish/Mulish-ExtraBold.ttf') format('ttf');
   }
   @font-face {
     font-family: 'Mukadimah';
     font-style: normal;
     font-display: swap;
-    src: local('Mukadimah.ttf'), url('./font/Mukadimah/Mukadimah.ttf');
-    src: url('./font/Mukadimah/Mukadimah.ttf') format('ttf');
+    src: local('Mukadimah.ttf'), url('/font/Mukadimah/Mukadimah.ttf');
+    src: url('/font/Mukadimah/Mukadimah.ttf') format('ttf');
   }
 }
 
