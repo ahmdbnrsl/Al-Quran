@@ -1,15 +1,35 @@
-import Input from '.././Elements/Input.tsx';
-import { useState, useEffect, MouseEvent, ChangeEvent } from 'react';
+
+import { 
+    useState,
+    useEffect,
+    MouseEvent,
+    ChangeEvent
+} from 'react';
 import { FaCircleUser } from "react-icons/fa6";
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
-import Button from '.././Elements/Button.tsx';
 import { RxCross2 } from "react-icons/rx";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import {
+    Link,
+    useSearchParams,
+    useNavigate
+} from "react-router-dom";
+
 import { listSurah } from '../.././service/FetchData/ListSurah.service.ts';
-import { ResultListSurah, DetailList } from '../.././types/ResultListSurah.interface.ts';
+import {
+    ResultListSurah,
+    DetailList
+} from '../.././types/ResultListSurah.interface.ts';
+
+import Input from '.././Elements/Input.tsx';
+import Button from '.././Elements/Button.tsx';
 import ListSurahSkeleton from '.././Skeletons/ListSurah.skeleton.tsx';
 
 export default () => {
+    
+    const getCookieValue = (name: string) => (
+        document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
+    );
+    
     const recentRead: boolean = false;
     const [searchParams, setSearchParams] = useSearchParams();
     const [hidden, setHidden] = useState<boolean>(false);
@@ -18,13 +38,10 @@ export default () => {
     
     const getSurah: string | null = window.localStorage.getItem('list_surah');
     const navigate = useNavigate();
-    const getCookieValue = (name: string) => (
-        document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
-    );
     
     useEffect(() => {
         const authToken: string | null = getCookieValue("authToken");
-        if(!authToken) {
+        if(!authToken /*|| !isValidToken*/) {
             navigate('/masuk');
         }
     }, []);
@@ -48,16 +65,23 @@ export default () => {
     
     const SearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
         if (e.target.value !== "") {
-            searchParams.set("nama", e.target.value);
+            searchParams.set("cari", e.target.value);
             setSearchParams(searchParams);
         } else {
-            searchParams.delete("nama");
+            searchParams.delete("cari");
             setSearchParams(searchParams);
         }
     }
     
-    const query = searchParams.get("nama");
-    const filteredSurah = surahs?.filter((surah: DetailList): boolean | undefined => surah?.nama_latin?.toLowerCase().includes(query?.toLowerCase() || ""));
+    const query = searchParams.get("cari");
+    
+    const filteredSurah = surahs?.filter((surah: DetailList): boolean | undefined => {
+        if(!Number(query)) {
+            return surah?.nama_latin?.toLowerCase().includes(query?.toLowerCase() || "")
+        } else {
+            return surah?.nomor?.toString().includes(query || "")
+        }
+    });
     
     return (
         <>

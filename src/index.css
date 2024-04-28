@@ -126,7 +126,7 @@
         @apply font-mulish font-bold text-lg -mt-3 mb-0 border-b-0 text-teal-500 dark:text-orange-500
     }
     .footer-navigate {
-        @apply text-sm font-mulish font-normal text-zinc-800 dark:text-zinc-400
+        @apply text-sm font-mulish font-normal text-zinc-500 dark:text-zinc-400
     }
 }
 
