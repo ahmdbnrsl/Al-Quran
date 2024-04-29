@@ -5,6 +5,7 @@ import {
     MouseEvent,
     ChangeEvent
 } from 'react';
+import { jwtDecode } from 'jwt-decode';
 import { FaCircleUser } from "react-icons/fa6";
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
 import { RxCross2 } from "react-icons/rx";
@@ -15,6 +16,7 @@ import {
 } from "react-router-dom";
 
 import { listSurah } from '../.././service/FetchData/ListSurah.service.ts';
+import { logout } from '../.././service/Auth/Logout.ts';
 import {
     ResultListSurah,
     DetailList
@@ -22,9 +24,16 @@ import {
 
 import Input from '.././Elements/Input.tsx';
 import Button from '.././Elements/Button.tsx';
+import Loading from '.././Elements/Loading.tsx';
 import ListSurahSkeleton from '.././Skeletons/ListSurah.skeleton.tsx';
+import ProfileSkeleton from '.././Skeletons/ProfileModal.skeleton.tsx';
 
 export default () => {
+    interface User {
+        name: string;
+        username: string;
+        password: string;
+    }
     
     const getCookieValue = (name: string) => (
         document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
@@ -32,17 +41,23 @@ export default () => {
     
     const recentRead: boolean = false;
     const [searchParams, setSearchParams] = useSearchParams();
+    const [user, setUser] = useState<User | null>(null);
     const [hidden, setHidden] = useState<boolean>(false);
+    const [isHidden, setIsHidden] = useState<boolean>(true);
     const [surahs, setSurahs] = useState<ResultListSurah[]>([]);
     const [loadingSurah, setLoadingSurah] = useState<boolean>(true);
+    const [loadingProfile, setLoadingProfile] = useState<boolean>(true);
     
     const getSurah: string | null = window.localStorage.getItem('list_surah');
     const navigate = useNavigate();
     
     useEffect(() => {
         const authToken: string | null = getCookieValue("authToken");
-        if(!authToken /*|| !isValidToken*/) {
+        if(!authToken) {
             navigate('/masuk');
+        } else {
+            const userInfo: User = jwtDecode(authToken);
+            setUser(userInfo);
         }
     }, []);
     
@@ -71,6 +86,15 @@ export default () => {
             searchParams.delete("cari");
             setSearchParams(searchParams);
         }
+    }
+    
+    const HandleLogout = (e: MouseEvent<HTMLButtonElement>): void => {
+        e.preventDefault();
+        setIsHidden(false);
+        logout(() => {
+            setIsHidden(true);
+            navigate('/masuk');
+        });
     }
     
     const query = searchParams.get("cari");
@@ -113,6 +137,7 @@ export default () => {
                     className={`btn-bar ${hidden ? 'hidden' : 'visible'}`}
                     onClick={(): void => {
                         setHidden(true);
+                        setTimeout(() => setLoadingProfile(false), 1500);
                     }}>
                         <HiMiniBars3BottomRight/>
                     </button>
@@ -128,9 +153,28 @@ export default () => {
                 <div className={`modal-container ${hidden ? 'visible' : 'hidden'}`}>
                     <div className="modal mx-3">
                         <FaCircleUser className="mt-5 text-6xl text-zinc-200 dark:text-zinc-600"/>
-                        <h1 className="name">Ahmad Beni Rusli</h1>
-                        <p className="username">@ahmadbeni2727</p>
-                        <Button type="button">Keluar</Button>
+                        {
+                            loadingProfile && <ProfileSkeleton/>
+                        }
+                        {
+                            !loadingProfile &&
+                            <>
+                                <h1 className="name">{user?.name}</h1>
+                                <p className="username">@{user?.username}</p>
+                            </>
+                        }
+                        <Button
+                        type="button"
+                        onClick={HandleLogout}
+                        isHidden={!isHidden}
+                        >Keluar</Button>
+                        <Button
+                        type="button"
+                        isHidden={isHidden}
+                        >
+                            <Loading/>
+                            Keluar...
+                        </Button>
                     </div>
                 </div>
             </div>
