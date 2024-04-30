@@ -1,12 +1,11 @@
-
-import ListSurahLayout from '.././components/Layouts/ListSurahLayout.tsx';
+import DetailSurahLayout from '.././components/Layouts/DetailSurahLayout.tsx';
 import Footer from '.././components/Layouts/FooterLayout.tsx';
 
 export default () => {
     return (
         <div className="index-box justify-between">
             <div className="index-box">
-                <ListSurahLayout/>
+                <DetailSurahLayout/>
             </div>
             <Footer/>
         </div>

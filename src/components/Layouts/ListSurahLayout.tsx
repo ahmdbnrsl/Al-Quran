@@ -206,7 +206,7 @@ export default () => {
 const BoxSurah = ({surah}: {surah: DetailList}) => {
     return (
         <Link
-        to={`/${surah?.nama_latin}`}
+        to={`/surah/${surah?.nomor}`}
         className="surah-box"
         >
             <div className="flex items-center gap-3">
