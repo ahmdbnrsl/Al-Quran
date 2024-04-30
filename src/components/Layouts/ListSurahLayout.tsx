@@ -8,6 +8,7 @@ import {
 import { jwtDecode } from 'jwt-decode';
 import { FaCircleUser } from "react-icons/fa6";
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
+import { IoSearch } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import {
     Link,
@@ -28,6 +29,7 @@ import Loading from '.././Elements/Loading.tsx';
 import ListSurahSkeleton from '.././Skeletons/ListSurah.skeleton.tsx';
 import ProfileSkeleton from '.././Skeletons/ProfileModal.skeleton.tsx';
 
+
 export default () => {
     interface User {
         name: string;
@@ -47,7 +49,6 @@ export default () => {
     const [surahs, setSurahs] = useState<ResultListSurah[]>([]);
     const [loadingSurah, setLoadingSurah] = useState<boolean>(true);
     const [loadingProfile, setLoadingProfile] = useState<boolean>(true);
-    
     const getSurah: string | null = window.localStorage.getItem('list_surah');
     const navigate = useNavigate();
     
@@ -124,13 +125,16 @@ export default () => {
             </div>
             <div className="nav-box items-center flex-col">
                 <div className="nav-box max-w-[61.5rem] pt-1 px-0 pb-0 shadow-none gap-3">
-                    <div className="w-full max-w-xs">
+                    <div className="w-full max-w-xs relative flex justify-end items-center">
                         <Input 
                         text="Cari surah"
                         identify="search"
                         onChanges={SearchChange}
                         styles="placeholder:text-zinc-400 dark:placeholder:text-zinc-600"
                         />
+                        <div className="mr-0.5 py-2 px-4 absolute rounded-r-xl bg-zinc-100 dark:bg-zinc-900">
+                            <IoSearch className="text-xl text-teal-500 dark:text-orange-500"/>
+                        </div>
                     </div>
                     <button
                     type="button"

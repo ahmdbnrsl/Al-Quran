@@ -25,6 +25,10 @@ const router = createBrowserRouter([
     {
         path: "/masuk",
         element: <Login/>
+    },
+    {
+        path: "/surah/:nameSurah",
+        element: <ListSurah/>
     }
 ])
 ReactDOM.createRoot(document.getElementById('root')!).render(
