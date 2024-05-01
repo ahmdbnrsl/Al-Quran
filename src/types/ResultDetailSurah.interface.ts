@@ -31,7 +31,7 @@ export interface DetailSurahs {
     arti?: string;
     deskripsi?: string;
     audio?: string;
-    ayat?: Ayat;
+    ayat?: Array<Ayat>;
     surat_selanjutnya?: SurahBeforeAfter | boolean;
     surat_sebelumnya?: SurahBeforeAfter | boolean;
 }

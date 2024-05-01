@@ -11,7 +11,7 @@ const urlApi: string = import.meta.env.VITE_URLAPI;
 
 export const detailSurah = (
     id: string | undefined,
-    callback: (result: Ayat[] | undefined) => void
+    callback: (result: DetailSurahs | undefined) => void
 ) => {
     const options = {
         url: urlApi + 'surah/' + id,
@@ -24,7 +24,7 @@ export const detailSurah = (
     axios
     .request(options)
     .then(res => {
-        callback(res.data.ayat);
+        callback(res.data);
     })
     .catch(() => {
         callback(undefined);
