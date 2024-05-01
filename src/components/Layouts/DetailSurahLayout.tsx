@@ -69,7 +69,7 @@ const ListAyat = ({ayat} : {ayat: DetailAyat}) => {
     return (
          <div className="ayat-box pt-6">
             <div className="w-full flex justify-between items-center">
-                <h1 className="text-teal-500 font-bold text-3xl dark:text-orange-500 font-arab">〘{ayat?.nomor?.toLocaleString('ar-EG')}〙</h1>
+                <h1 className="text-teal-500 font-bold text-3xl dark:text-orange-500 font-arab">&#64830;{ayat?.nomor?.toLocaleString('ar-EG')}&#64831;</h1>
                 <div dir="rtl" className="w-10/12">
                     <h1 className="leading-[4.5rem] text-3xl text-zinc-800 font-arab dark:text-zinc-200">{ayat?.ar?.replace(/ ࣖ/g, '')}</h1>
                 </div>
