@@ -31,6 +31,7 @@
     "jsonwebtoken": "latest",
     "jwt-decode": "latest",
     "postcss": "latest",
+    "html-react-parser": "latest",
     "react-icons": "latest",
     "react-loading-skeleton": "latest",
     "react-router-dom": "latest",

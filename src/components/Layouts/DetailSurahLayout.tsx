@@ -4,6 +4,7 @@ import {
     Ayat,
     DetailAyat
 } from '../.././types/ResultDetailSurah.interface.ts';
+import parse from 'html-react-parser';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { detailSurah } from '../.././service/FetchData/DetailSurah.service.ts';
@@ -19,11 +20,13 @@ export default () => {
             navigate('/surah');
         } else {
             const dataSurah: string = window.localStorage.getItem("id_surah_" + id) as string;
+            const query = searchParams.get("nama");
             if(!dataSurah) {
                 detailSurah(id, (result: DetailSurahs | undefined): void => {
                     setSurah(result?.ayat);
-                    searchParams.set("nama", result?.nama_latin as string);
-                    setSearchParams(searchParams);
+                    if(query !== result?.nama_latin) {
+                        navigate('/surah')
+                    }
                     if(result !== undefined || result) {
                         window.localStorage.setItem('id_surah_' + result?.nomor?.toString(), JSON.stringify(result));
                     }
@@ -31,8 +34,9 @@ export default () => {
             } else {
                 const resStorage: DetailSurahs = JSON.parse(dataSurah);
                 setSurah(resStorage?.ayat);
-                searchParams.set("nama", resStorage.nama_latin as string);
-                setSearchParams(searchParams);
+                if(query !== resStorage?.nama_latin) {
+                    navigate('/surah')
+                }
             }
         }
     }, [surah]);
@@ -50,12 +54,7 @@ export default () => {
                    {
                         surah?.map((ayat: DetailAyat) => {
                             return (
-                                <div className="w-full p-5 rounded-2xl bg-zinc-900 border border-zinc-800">
-                                <div dir="rtl" className="w-full">
-                                    <h1 className="leading-[4.5rem] text-3xl text-white font-arab">{ayat?.ar?.replace(/ ࣖ/g, '')}</h1>
-                                </div>
-                                <h1 className="text-zinc-400 font-mulish font-medium">{ayat?.idn}</h1>
-                                </div>
+                                <ListAyat ayat={ayat}/>
                             )
                         })
                     }
@@ -63,5 +62,24 @@ export default () => {
                 </div>
             </div>
         </>
+    )
+}
+
+const ListAyat = ({ayat} : {ayat: DetailAyat}) => {
+    return (
+         <div className="ayat-box pt-6">
+            <div className="w-full flex justify-between items-center">
+                <h1 className="text-teal-500 font-bold text-3xl dark:text-orange-500 font-arab">〘{ayat?.nomor?.toLocaleString('ar-EG')}〙</h1>
+                <div dir="rtl" className="w-10/12">
+                    <h1 className="leading-[4.5rem] text-3xl text-zinc-800 font-arab dark:text-zinc-200">{ayat?.ar?.replace(/ ࣖ/g, '')}</h1>
+                </div>
+            </div>
+            <div className="w-full mt-3">
+                <p className="h-full text-lg text-zinc-700 dark:text-zinc-300 font-mulish font-semibold">{parse(ayat?.tr as string)}</p>
+            </div>
+            <div className="w-full mt-1.5">
+                <p className="h-full text-lg text-zinc-600 dark:text-zinc-400 font-mulish font-normal">{ayat?.idn}</p>
+            </div>
+        </div>
     )
 }
