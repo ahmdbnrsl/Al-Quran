@@ -69,7 +69,7 @@ const ListAyat = ({ayat} : {ayat: DetailAyat}) => {
     return (
          <div className="ayat-box pt-6">
             <div dir="rtl" className="w-full">
-                <h1 className="leading-[4.5rem] text-3xl text-zinc-800 font-arab dark:text-zinc-200">{ayat?.ar?.replace(/ ࣖ/g, '')} &#64831;{ayat?.nomor?.toLocaleString('ar-EG')}&#64830;</h1>
+                <h1 className="leading-[4.5rem] text-3xl text-zinc-800 font-arab dark:text-zinc-200">{ayat?.ar?.replace(/ ࣖ/g, '')} <span className="text-2xl text-teal-500 dark:text-orange-500">&#64831;{ayat?.nomor?.toLocaleString('ar-EG')}&#64830;</span></h1>
             </div>
             <div className="w-full mt-3">
                 <p className="h-full text-lg text-zinc-700 dark:text-zinc-300 font-mulish font-semibold">{parse(ayat?.tr as string)}</p>
