@@ -67,15 +67,22 @@ export default () => {
 
 const ListAyat = ({ayat} : {ayat: DetailAyat}) => {
     return (
-         <div className="ayat-box pt-6">
+         <div 
+         className="ayat-box pt-6" 
+         id={ayat?.nomor?.toString() as string}
+         key={ayat?.nomor?.toString() as string}
+         >
             <div dir="rtl" className="w-full">
-                <h1 className="leading-[4.5rem] text-3xl text-zinc-800 font-arab dark:text-zinc-200">{ayat?.ar?.replace(/ ࣖ/g, '')} <span className="text-2xl text-teal-500 dark:text-orange-500">&#64831;{ayat?.nomor?.toLocaleString('ar-EG')}&#64830;</span></h1>
+                <h1 className="leading-[4.5rem] text-3xl text-zinc-800 font-arab dark:text-zinc-200">{ayat?.ar?.replace(/ ࣖ/g, '').replace(/\ٖ/g, 'ٍ')} <span className="text-2xl text-teal-500 dark:text-orange-500">&#64831;{ayat?.nomor?.toLocaleString('ar-EG')}&#64830;</span></h1>
             </div>
             <div className="w-full mt-3">
                 <p className="h-full text-lg text-zinc-700 dark:text-zinc-300 font-mulish font-semibold">{parse(ayat?.tr as string)}</p>
             </div>
             <div className="w-full mt-1.5">
                 <p className="h-full text-lg text-zinc-600 dark:text-zinc-400 font-mulish font-normal">{ayat?.idn}</p>
+            </div>
+            <div className="mt-1.5">
+                <button className="btn text-zinc-600 bg-transparent border-2 border-teal-300 dark:border-zinc-700 dark:text-zinc-400">Tandai</button>
             </div>
         </div>
     )
