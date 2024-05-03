@@ -70,7 +70,7 @@ export default () => {
     
     return (
         <>
-            <div className="bg-hero bg-center bg-cover bg-no-repeat w-full p-5 flex flex-col items-center bg-teal-500 dark:bg-zinc-900 dark:bg-orange-600">
+            <div className="bg-hero bg-center bg-cover bg-no-repeat w-full p-5 flex flex-col items-center bg-teal-500 dark:bg-orange-600">
                 <div className="p-5 w-full max-w-[61.5rem] flex justify-between items-center bg-teal-700 rounded-2xl dark:bg-orange-900">
                     <div>
                         <p className="text-lg text-zinc-50 font-mulish font-bold dark:text-zinc-50">{desc?.nama_latin}</p>
@@ -93,12 +93,12 @@ export default () => {
                     <Input 
                     text="Cari Ayat"
                     identify="search"
-                    styles="max-w-xs placeholder:text-zinc-400 dark:placeholder:text-zinc-600"
+                    styles="text-sm max-w-[15rem] placeholder:text-zinc-400 dark:placeholder:text-zinc-600"
                     />
                 </div>
             </div>
             <div className="list-surah-container">
-                <div className="gap-5 list-surah flex-col items-center justify-start">
+                <div className="gap-3 list-surah flex flex-col items-center justify-start">
                    {
                         surah?.map((ayat: DetailAyat) => {
                             return (
@@ -121,7 +121,7 @@ const ListAyat = ({ayat} : {ayat: DetailAyat}) => {
          key={ayat?.id?.toString() as string}
          >
             <div dir="rtl" className="w-full">
-                <h1 className="leading-[4.5rem] text-2xl text-zinc-700 font-arab dark:text-zinc-200">
+                <h1 className="bg-zinc-100 rounded-xl px-2 leading-[4.5rem] text-2xl text-zinc-700 font-arab dark:text-zinc-200 dark:bg-zinc-800">
                     {ayat?.ar?.replace(/ ࣖ/g, '').replace(/\ٖ/g, 'ٍ')}
                     <span className="text-2xl text-teal-500 dark:text-orange-500">
                         &#64831;{ayat?.nomor?.toLocaleString('ar-EG')}&#64830;

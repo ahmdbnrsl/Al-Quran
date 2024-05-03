@@ -17,6 +17,9 @@ export default {
         'light-theme': "url('/background/lightTheme.jpg')",
         'hero': "url('/background/hero.png')",
         'footer': "url('/background/footer.png')"
+      },
+      gridTemplateColumns: {
+          'auto-fit': 'repeat(auto-fit, minmax(20rem, 1fr))'
       }
     },
   },

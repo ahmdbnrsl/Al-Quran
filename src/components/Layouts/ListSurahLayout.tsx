@@ -183,7 +183,7 @@ export default () => {
                 </div>
             </div>
             <div className="list-surah-container">
-                <div className="list-surah">
+                <div className="list-surah grid grid-cols-auto-fit">
                     {
                         loadingSurah && Array(114).fill(0).map(() => {
                             return <ListSurahSkeleton/>

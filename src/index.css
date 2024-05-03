@@ -96,13 +96,13 @@
         @apply -mt-1 font-mulish font-normal text-sm text-zinc-400 dark:text-zinc-400
     }
     .list-surah-container {
-        @apply w-full flex justify-center
+        @apply w-full flex justify-center p-5
     }
     .list-surah {
-        @apply w-full max-w-6xl p-5 flex flex-wrap justify-center gap-3
+        @apply w-full max-w-[61.5rem] flex flex-wrap justify-center gap-3
     }
     .surah-box {
-        @apply flex justify-between w-full px-4 py-3 rounded bg-zinc-50 shadow shadow-2xl shadow-zinc-200 border border-zinc-200 items-center dark:bg-zinc-900 dark:shadow-zinc-950 dark:border-zinc-800 md:max-w-xs
+        @apply flex justify-between w-full px-4 py-3 rounded bg-zinc-50 shadow shadow-2xl shadow-zinc-200 border border-zinc-200 items-center dark:bg-zinc-900 dark:shadow-zinc-950 dark:border-zinc-800
     }
     .ayat-box {
         @apply flex flex-col w-full p-5 rounded-xl bg-zinc-50 shadow shadow-2xl shadow-zinc-200 border border-zinc-200 items-start dark:bg-zinc-900 dark:shadow-zinc-950 dark:border-zinc-800
