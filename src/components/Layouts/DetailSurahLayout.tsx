@@ -14,11 +14,14 @@ import {
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { detailSurah } from '../.././service/FetchData/DetailSurah.service.ts';
 import Input from '.././Elements/Input.tsx';
+import AyahSkeleton from '../Skeletons/Ayah.skeleton.tsx';
+import DescSkeleton from '../Skeletons/DescSurah.skeleton.tsx';
 
 export default () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
+    const [ayahLoading, setAyahLoading] = useState<boolean>(true);
     const [desc, setDesc] = useState<DetailSurahs | null>(null);
     const [surah, setSurah] = useState<Array<Ayat> | undefined | null>(null);
     
@@ -31,6 +34,7 @@ export default () => {
             if(!dataSurah) {
                 detailSurah(id, (result: DetailSurahs | undefined): void => {
                     setSurah(result?.ayat);
+                    setAyahLoading(false);
                     setDesc({
                         nomor: result?.nomor,
                         nama: result?.nama,
@@ -61,32 +65,41 @@ export default () => {
                     audio: resStorage?.audio
                 });
                 setSurah(resStorage?.ayat);
+                setAyahLoading(false);
                 if(query !== resStorage?.nama_latin) {
                     navigate('/surah')
                 }
             }
         }
-    }, [surah, desc]);
+    }, [surah, desc, ayahLoading]);
     
     return (
         <>
             <div className="bg-hero bg-center bg-cover bg-no-repeat w-full p-5 flex flex-col items-center bg-teal-500 dark:bg-orange-600">
-                <div className="p-5 w-full max-w-[61.5rem] flex justify-between items-center bg-teal-700 rounded-2xl dark:bg-orange-900">
-                    <div>
-                        <p className="text-lg text-zinc-50 font-mulish font-bold dark:text-zinc-50">{desc?.nama_latin}</p>
-                        <p className="text-sm text-zinc-100 font-mulish font-semibold dark:text-zinc-50">{desc?.arti}</p>
-                        <p className="text-sm text-teal-300 font-mulish font-semibold dark:text-orange-400">
-                            {desc?.tempat_turun}
-                        </p>
+                <h1 className="hero-title">القرآن الكريم</h1>
+            {
+                ayahLoading && <DescSkeleton/>
+            }
+            {
+                !ayahLoading && <div className="mt-3 w-full max-w-[61.5rem] p-5 bg-teal-700 rounded-2xl dark:bg-orange-900">
+                    <div className="p-5 w-full flex justify-between items-center">
+                        <div>
+                            <p className="text-lg text-zinc-50 font-mulish font-bold dark:text-zinc-50">{desc?.nama_latin}</p>
+                            <p className="text-sm text-zinc-100 font-mulish font-semibold dark:text-zinc-50">{desc?.arti}</p>
+                            <p className="text-sm text-teal-300 font-mulish font-semibold dark:text-orange-400">
+                                {desc?.tempat_turun}
+                            </p>
+                        </div>
+                        <div>
+                            <h1 className="text-3xl font-kufi text-teal-300 dark:text-orange-400">{desc?.nama}</h1>
+                            <p className="font-arab mt-2 text-lg text-teal-300 font-semibold dark:text-orange-400">{desc?.jumlah_ayat?.toLocaleString('ar-EG')} اية</p>
+                        </div>
                     </div>
-                    <div>
-                        <h1 className="text-3xl font-kufi text-teal-300 dark:text-orange-400">{desc?.nama}</h1>
-                        <p className="font-arab mt-2 text-lg text-teal-300 font-semibold dark:text-orange-400">{desc?.jumlah_ayat?.toLocaleString('ar-EG')} اية</p>
+                    <div className="text-xs bg-teal-900 text-zinc-100 mt-3 rounded-2xl w-full p-5 flex flex-col items-center dark:bg-orange-950">
+                        <p className="h-full">{parse(`${desc?.deskripsi?.toString() as  string}`)}</p>
                     </div>
                 </div>
-                <div className="hidden bg-teal-100 border border-zinc-200 shadow-2xl shadow-zinc-300 max-w-[61.5rem] text-zinc-600 mt-3 rounded-2xl w-full p-5 flex flex-col items-center bg-zinc-100 dark:bg-[#222] dark:text-zinc-400 dark:shadow-zinc-950 dark:border-zinc-800">
-                    <p className="h-full">{parse(`${desc?.deskripsi?.toString() as  string}`)}</p>
-                </div>
+            }
             </div>
             <div className="nav-box mt-0 justify-center border-t border-zinc-200 dark:border-zinc-800">
                 <div className="justify-between w-full max-w-[61.5rem]">
@@ -100,7 +113,12 @@ export default () => {
             <div className="list-surah-container">
                 <div className="gap-3 list-surah flex flex-col items-center justify-start">
                    {
-                        surah?.map((ayat: DetailAyat) => {
+                        ayahLoading && Array(20).fill(0).map(() => {
+                            return <AyahSkeleton/>
+                        })
+                   }
+                   {
+                        !ayahLoading && surah?.map((ayat: DetailAyat) => {
                             return (
                                 <ListAyat ayat={ayat}/>
                             )
