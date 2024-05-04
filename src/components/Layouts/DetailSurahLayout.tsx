@@ -88,17 +88,17 @@ export default () => {
                 if(query !== resStorage?.nama_latin) {
                     navigate('/surah')
                 }
+                const ids: string = window.location.hash;
+                const el: HTMLElement | null = document.getElementById(ids.replace(/#/g, ""));
+                if(el !== null || el) {
+                    el.scrollIntoView({
+                        block: 'nearest',
+                        behavior: 'smooth'
+                    });
+                }
             }
         }
     }, [surah, desc, ayahLoading]);
-    
-    useEffect(() => {
-        const el = document.getElementById('7');
-        if(el) {
-            el.scrollIntoView(true);
-        }
-        
-    }, [])
     
     const SearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
         if (e.target.value !== "") {
