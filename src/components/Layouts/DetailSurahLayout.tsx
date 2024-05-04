@@ -5,13 +5,21 @@ import {
     DetailAyat
 } from '../.././types/ResultDetailSurah.interface.ts';
 import parse from 'html-react-parser';
-import { useState, useEffect } from 'react';
+import { 
+    useState, 
+    useEffect,
+    ChangeEvent
+} from 'react';
 import { 
     FaRegCopy, 
     FaRegBookmark, 
     FaRegShareFromSquare 
 } from "react-icons/fa6";
-import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { 
+    useParams,
+    useNavigate,
+    useSearchParams
+} from 'react-router-dom';
 import { detailSurah } from '../.././service/FetchData/DetailSurah.service.ts';
 import Input from '.././Elements/Input.tsx';
 import AyahSkeleton from '../Skeletons/Ayah.skeleton.tsx';
@@ -23,7 +31,7 @@ export default () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [ayahLoading, setAyahLoading] = useState<boolean>(true);
     const [desc, setDesc] = useState<DetailSurahs | null>(null);
-    const [surah, setSurah] = useState<Array<Ayat> | undefined | null>(null);
+    const [surah, setSurah] = useState<Array<Ayat>>([]);
     
     useEffect(() => {
         if(!Number(id) || Number(id) < 1 || Number(id) > 114 || !id) {
@@ -33,7 +41,7 @@ export default () => {
             const query = searchParams.get("nama");
             if(!dataSurah) {
                 detailSurah(id, (result: DetailSurahs | undefined): void => {
-                    setSurah(result?.ayat);
+                    setSurah(result?.ayat as Array<Ayat>);
                     setAyahLoading(false);
                     setDesc({
                         nomor: result?.nomor,
@@ -64,7 +72,7 @@ export default () => {
                     deskripsi: resStorage?.deskripsi,
                     audio: resStorage?.audio
                 });
-                setSurah(resStorage?.ayat);
+                setSurah(resStorage?.ayat as Array<Ayat>);
                 setAyahLoading(false);
                 if(query !== resStorage?.nama_latin) {
                     navigate('/surah')
@@ -73,29 +81,45 @@ export default () => {
         }
     }, [surah, desc, ayahLoading]);
     
+    const SearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        if (e.target.value !== "") {
+            searchParams.set("Ayah", e.target.value);
+            setSearchParams(searchParams);
+        } else {
+            searchParams.delete("Ayah");
+            setSearchParams(searchParams);
+        }
+    }
+    
+    const query = searchParams.get("Ayah");
+    
+    const filteredAyah = surah?.filter((ayah: DetailAyat): boolean | undefined => {
+        return ayah?.nomor?.toString().toLowerCase().includes(query?.toLowerCase() || "")
+    });
+    
     return (
         <>
-            <div className="bg-hero bg-center bg-cover bg-no-repeat w-full p-5 flex flex-col items-center bg-teal-500 dark:bg-orange-600">
+            <div className="detail-hero">
                 <h1 className="hero-title">القرآن الكريم</h1>
             {
                 ayahLoading && <DescSkeleton/>
             }
             {
-                !ayahLoading && <div className="mt-3 w-full max-w-[61.5rem] p-5 bg-teal-700 rounded-2xl dark:bg-orange-900">
-                    <div className="p-5 w-full flex justify-between items-center">
+                !ayahLoading && <div className="desc-container">
+                    <div className="header-desc">
                         <div>
-                            <p className="text-lg text-zinc-50 font-mulish font-bold dark:text-zinc-50">{desc?.nama_latin}</p>
-                            <p className="text-sm text-zinc-100 font-mulish font-semibold dark:text-zinc-50">{desc?.arti}</p>
-                            <p className="text-sm text-teal-300 font-mulish font-semibold dark:text-orange-400">
+                            <p className="desc-nama-latin">{desc?.nama_latin}</p>
+                            <p className="desc-arti">{desc?.arti}</p>
+                            <p className="desc-tempat-turun">
                                 {desc?.tempat_turun}
                             </p>
                         </div>
                         <div>
-                            <h1 className="text-3xl font-kufi text-teal-300 dark:text-orange-400">{desc?.nama}</h1>
-                            <p className="font-arab mt-2 text-lg text-teal-300 font-semibold dark:text-orange-400">{desc?.jumlah_ayat?.toLocaleString('ar-EG')} اية</p>
+                            <h1 className="desc-nama">{desc?.nama}</h1>
+                            <p className="desc-jumlah-ayat">{desc?.jumlah_ayat?.toLocaleString('ar-EG')} اية</p>
                         </div>
                     </div>
-                    <div className="text-xs bg-teal-900 text-zinc-100 mt-3 rounded-2xl w-full p-5 flex flex-col items-center dark:bg-orange-950">
+                    <div className="desc-desc">
                         <p className="h-full">{parse(`${desc?.deskripsi?.toString() as  string}`)}</p>
                     </div>
                 </div>
@@ -106,6 +130,7 @@ export default () => {
                     <Input 
                     text="Cari Ayat"
                     identify="search"
+                    onChanges={SearchChange}
                     styles="text-sm max-w-[15rem] placeholder:text-zinc-400 dark:placeholder:text-zinc-600"
                     />
                 </div>
@@ -118,11 +143,11 @@ export default () => {
                         })
                    }
                    {
-                        !ayahLoading && surah?.map((ayat: DetailAyat) => {
+                        !ayahLoading && filteredAyah?.length > 0 ? filteredAyah?.map((ayat: DetailAyat) => {
                             return (
                                 <ListAyat ayat={ayat}/>
                             )
-                        })
+                        }) : !ayahLoading && <p className="font-mulish text-lg mt-5 text-teal-500 dark:text-orange-500">Ayah tidak ditemukan.</p>
                     }
                     
                 </div>
@@ -139,18 +164,18 @@ const ListAyat = ({ayat} : {ayat: DetailAyat}) => {
          key={ayat?.id?.toString() as string}
          >
             <div dir="rtl" className="w-full">
-                <h1 className="bg-zinc-100 rounded-xl px-2 leading-[4.5rem] text-2xl text-zinc-700 font-arab dark:text-zinc-200 dark:bg-zinc-800">
+                <h1 className="ayat-arab">
                     {ayat?.ar?.replace(/ ࣖ/g, '').replace(/\ٖ/g, 'ٍ')}
-                    <span className="text-2xl text-teal-500 dark:text-orange-500">
+                    <span className="ayat-nomor">
                         &#64831;{ayat?.nomor?.toLocaleString('ar-EG')}&#64830;
                     </span>
                 </h1>
             </div>
             <div className="w-full mt-3">
-                <p className="h-full text-sm text-zinc-700 dark:text-zinc-300 font-mulish font-semibold">{parse(ayat?.tr as string)}</p>
+                <p className="ayat-tr">{parse(ayat?.tr as string)}</p>
             </div>
             <div className="w-full mt-1.5">
-                <p className="h-full text-sm text-zinc-600 dark:text-zinc-400 font-mulish font-normal">{ayat?.idn}</p>
+                <p className="ayat-idn">{ayat?.idn}</p>
             </div>
             <div className="w-full flex justify-start gap-3">
                 <button className="items-center btn rounded-full w-auto gap-2">

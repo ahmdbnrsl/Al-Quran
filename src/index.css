@@ -33,7 +33,7 @@
         @apply selection:text-zinc-100 selection:bg-teal-500 dark:selection:text-zinc-900 dark:selection:bg-orange-500
     }
     .index-box {
-        @apply flex flex-col items-center bg-center bg-no-repeat bg-cover bg-zinc-100 w-full min-h-screen dark:bg-zinc-900
+        @apply flex flex-col items-center bg-zinc-100 bg-index-light bg-smaller w-full min-h-screen dark:bg-zinc-900 dark:bg-index-dark
     }
     .hero-box {
         @apply gap-5 bg-cover bg-center bg-no-repeat p-5 flex flex-col justify-center items-center w-full bg-hero bg-teal-500 dark:bg-orange-500;
@@ -118,6 +118,45 @@
     }
     .nama_surah_ar {
         @apply text-teal-500 text-3xl font-kufi dark:text-orange-500
+    }
+    .detail-hero {
+        @apply bg-hero bg-center bg-cover bg-no-repeat w-full p-5 flex flex-col items-center bg-teal-500 dark:bg-orange-600
+    }
+    .desc-container {
+        @apply mt-3 w-full max-w-[61.5rem] bg-teal-700 rounded-2xl dark:bg-orange-900
+    }
+    .header-desc {
+        @apply p-5 w-full flex justify-between items-center
+    }
+    .desc-nama-latin {
+        @apply text-lg text-zinc-50 font-mulish font-bold dark:text-zinc-50
+    }
+    .desc-arti {
+        @apply text-sm text-zinc-100 font-mulish font-semibold dark:text-zinc-50
+    }
+    .desc-tempat-turun {
+        @apply text-sm text-teal-300 font-mulish font-semibold dark:text-orange-400
+    }
+    .desc-nama {
+        @apply text-3xl font-kufi text-teal-300 dark:text-orange-400
+    }
+    .desc-jumlah-ayat {
+        @apply font-arab mt-2 text-lg text-teal-300 font-semibold dark:text-orange-400
+    }
+    .desc-desc {
+        @apply text-xs bg-teal-900 text-zinc-100 rounded-2xl w-full p-5 flex flex-col items-center dark:bg-orange-950
+    }
+    .ayat-arab {
+        @apply bg-zinc-100 rounded-xl px-2 leading-[4.5rem] text-2xl text-zinc-700 font-arab dark:text-zinc-200 dark:bg-zinc-800
+    }
+    .ayat-nomor {
+        @apply text-2xl text-teal-500 dark:text-orange-500
+    }
+    .ayat-tr {
+        @apply h-full text-sm text-zinc-700 dark:text-zinc-300 font-mulish font-semibold
+    }
+    .ayat-idn {
+        @apply h-full text-sm text-zinc-600 dark:text-zinc-400 font-mulish font-normal
     }
     .footer-container {
         @apply w-full flex border-t border-zinc-200 justify-center bg-zinc-50 dark:bg-zinc-900 dark:border-zinc-800
