@@ -113,10 +113,25 @@ export default () => {
             <div className="hero-box">
                 <h1 className="hero-title">القرآن الكريم</h1>
                 {
-                    recentRead ?
-                    <div className="history-box">
-                        
-                    </div>
+                    !recentRead ?
+                    <Link to="/surah/1?nama=Al-Fatihah#7" className="history-box items-center">
+                        <div>
+                            <p className="desc-tempat-turun">
+                                Lanjutkan membaca
+                            </p>
+                            <p className="desc-nama-latin">
+                                Al-Baqarah
+                            </p>
+                            <p className="desc-arti">
+                                Ayat 256
+                            </p>
+                        </div>
+                        <div>
+                            <h1 className="desc-nama">
+                                البقرة
+                            </h1>
+                        </div>
+                    </Link>
                     :
                     <div className="history-box items-center justify-center">
                         <h1 className="text-lg font-mulish text-teal-300 dark:text-orange-300">Belum ada bacaan</h1>

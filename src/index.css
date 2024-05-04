@@ -32,14 +32,17 @@
     * {
         @apply selection:text-zinc-100 selection:bg-teal-500 dark:selection:text-zinc-900 dark:selection:bg-orange-500
     }
+    html {
+        @apply scroll-smooth
+    }
     .index-box {
         @apply flex flex-col items-center bg-zinc-100 bg-index-light bg-smaller w-full min-h-screen dark:bg-zinc-900 dark:bg-index-dark
     }
     .hero-box {
-        @apply gap-5 bg-cover bg-center bg-no-repeat p-5 flex flex-col justify-center items-center w-full bg-hero bg-teal-500 dark:bg-orange-500;
+        @apply gap-5 bg-cover bg-center bg-no-repeat p-5 flex flex-col justify-center items-center w-full bg-hero bg-teal-500 dark:bg-orange-600;
     }
     .history-box {
-        @apply w-full max-w-[61.5rem] flex flex-col bg-teal-800 rounded-xl p-5 dark:bg-orange-800
+        @apply w-full max-w-[61.5rem] flex justify-between bg-teal-700 rounded-xl p-5 dark:bg-orange-900
     }
     .nav-box {
         @apply z-50 flex shadow-2xl shadow-zinc-300 justify-between items-center sticky top-0 px-5 py-3 w-full bg-zinc-50 dark:bg-zinc-900 dark:shadow-zinc-950

@@ -33,6 +33,17 @@ export default () => {
     const [desc, setDesc] = useState<DetailSurahs | null>(null);
     const [surah, setSurah] = useState<Array<Ayat>>([]);
     
+    const getCookieValue = (name: string) => (
+        document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
+    );
+    
+    useEffect(() => {
+        const authToken: string | null = getCookieValue("authToken");
+        if(!authToken) {
+            navigate('/masuk');
+        }
+    }, []);
+    
     useEffect(() => {
         if(!Number(id) || Number(id) < 1 || Number(id) > 114 || !id) {
             navigate('/surah');
@@ -80,6 +91,14 @@ export default () => {
             }
         }
     }, [surah, desc, ayahLoading]);
+    
+    useEffect(() => {
+        const el = document.getElementById('7');
+        if(el) {
+            el.scrollIntoView(true);
+        }
+        
+    }, [])
     
     const SearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
         if (e.target.value !== "") {
