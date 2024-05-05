@@ -25,11 +25,6 @@ export default () => {
                     </p>
                 </div>
             </div>
-            <div className="desc-desc">
-                <p className="h-full w-full">
-                    <Skeleton baseColor={!isDarkMode ? '#0f766e' : '#7c2d12'} highlightColor={!isDarkMode ? '#fafafa' : '#52525b'}  duration={1} height={30}/>
-                </p>
-            </div>
         </div>
     )
 }

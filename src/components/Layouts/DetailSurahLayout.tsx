@@ -8,21 +8,19 @@ import parse from 'html-react-parser';
 import { 
     useState, 
     useEffect,
-    forwardRef,
-    LegacyRef,
-    ChangeEvent,
-    SyntheticEvent,
-    ForwardRefRenderFunction
+    ChangeEvent
 } from 'react';
 import { 
     FaRegCopy, 
     FaRegBookmark, 
-    FaRegShareFromSquare 
+    FaRegShareFromSquare,
+    FaBookmark
 } from "react-icons/fa6";
 import { 
     useParams,
     useNavigate,
-    useSearchParams
+    useSearchParams,
+    Link
 } from 'react-router-dom';
 import { detailSurah } from '../.././service/FetchData/DetailSurah.service.ts';
 import Input from '.././Elements/Input.tsx';
@@ -36,6 +34,8 @@ export default () => {
     const [ayahLoading, setAyahLoading] = useState<boolean>(true);
     const [desc, setDesc] = useState<DetailSurahs | null>(null);
     const [surah, setSurah] = useState<Array<Ayat>>([]);
+    const [ID, setID] = useState<string>("");
+    const [nomorAyat, setNomorAyat] = useState<string>("");
     
     const getCookieValue = (name: string) => (
         document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
@@ -107,8 +107,31 @@ export default () => {
         }
     }
     
+    const HandleScroll = () => {
+        const el: HTMLElement | null = document.getElementById(ID);
+        if(el !== null || el) {
+            el.scrollIntoView({
+                block: "center",
+                behavior: "smooth"
+            })
+        }
+    }
+    
+    useEffect(() => {
+        const getRecentRead: null | string = window.localStorage.getItem("recent_read");
+        if(getRecentRead) {
+            const dataRecents: {
+                nama: string,
+                nama_latin: string,
+                ayat: string,
+                id: string
+            } = JSON.parse(getRecentRead);
+            setID(dataRecents?.id);
+            setNomorAyat(dataRecents?.ayat)
+        }
+    }, [ID, nomorAyat]);
+    
     const query = searchParams.get("Ayah");
-    const ID = "7";
     
     const filteredAyah = surah?.filter((ayah: DetailAyat): boolean | undefined => {
         return ayah?.nomor?.toString().toLowerCase().includes(query?.toLowerCase() || "")
@@ -137,9 +160,9 @@ export default () => {
                             <p className="desc-jumlah-ayat">{desc?.jumlah_ayat?.toLocaleString('ar-EG')} اية</p>
                         </div>
                     </div>
-                    <div className="desc-desc">
-                        <p className="h-full">{parse(`${desc?.deskripsi?.toString() as  string}`)}</p>
-                    </div>
+                    {ID && <div className="px-5 pb-5">
+                        <button onClick={HandleScroll} className="btn">Lanjutkan membaca (Ayat {nomorAyat})</button>
+                    </div> }
                 </div>
             }
             </div>
@@ -162,16 +185,23 @@ export default () => {
                    }
                    {
                         !ayahLoading && filteredAyah?.length > 0 ? filteredAyah?.map((ayat: DetailAyat) => {
-                            if(ayat?.id?.toString() === ID) {
+                            if(ID !== "" && ayat?.id?.toString() === ID) {
                                 return (
                                     <ListAyat 
+                                    namaSurah={desc?.nama}
+                                    namaLatin={desc?.nama_latin}
+                                    textBtn="Ditandai"
                                     ayat={ayat} 
-                                    styles="border-teal-500 dark:border-orange-500"
+                                    styles="border-2 border-teal-500 dark:border-orange-500"
                                     />
                                 )
                             } else {
                                 return (
-                                    <ListAyat ayat={ayat}/>
+                                    <ListAyat 
+                                    ayat={ayat}
+                                    namaSurah={desc?.nama}
+                                    namaLatin={desc?.nama_latin}
+                                    />
                                 )
                             }
                         }) : !ayahLoading && <p className="font-mulish text-lg mt-5 text-teal-500 dark:text-orange-500">Ayah tidak ditemukan.</p>
@@ -185,7 +215,13 @@ export default () => {
 }
 
 const ListAyat = (
-    {ayat, styles} : { ayat: DetailAyat, styles?: string | undefined },
+    {ayat, styles, textBtn, namaSurah, namaLatin} : {
+        ayat: DetailAyat,
+        styles?: string | undefined,
+        textBtn?: string,
+        namaSurah?: string,
+        namaLatin?: string
+    }
 ) => {
     return (
          <div
@@ -208,9 +244,42 @@ const ListAyat = (
                 <p className="ayat-idn">{ayat?.idn}</p>
             </div>
             <div className="w-full flex justify-start gap-3">
-                <button className="items-center btn rounded-full w-auto gap-2">
-                    <FaRegBookmark/>
-                    Tandai
+                <button 
+                className="items-center btn rounded-full w-auto gap-2"
+                onClick={() => {
+                    const getRecentRead: null | string = window.localStorage.getItem("recent_read");
+                    if(getRecentRead) {
+                        const dataRecent: {
+                            nama: string,
+                            nama_latin: string,
+                            ayat: string,
+                            id: string
+                        } = JSON.parse(getRecentRead);
+                        if(dataRecent?.id === ayat?.id?.toString()) {
+                            window.localStorage.removeItem("recent_read");
+                        } else {
+                            window.localStorage.removeItem("recent_read");
+                            window.localStorage.setItem("recent_read", JSON.stringify({
+                                nama: namaSurah,
+                                nama_latin: namaLatin,
+                                ayat: ayat?.nomor?.toString(),
+                                id: ayat?.id?.toString()
+                            }))
+                        }
+                    } else {
+                        window.localStorage.setItem("recent_read", JSON.stringify({
+                            nama: namaSurah,
+                            nama_latin: namaLatin,
+                            ayat: ayat?.nomor?.toString(),
+                            id: ayat?.id?.toString()
+                        }));
+                    }
+                }}
+                >
+                    {
+                        !textBtn ? <FaRegBookmark/> : <FaBookmark/>
+                    }
+                    {!textBtn ? "Tandai" : textBtn}
                 </button>
                 <button className="items-center btn rounded-full px-3 w-auto bg-zinc-200 text-teal-500 dark:text-orange-500 dark:bg-zinc-800">
                     <FaRegCopy/>
