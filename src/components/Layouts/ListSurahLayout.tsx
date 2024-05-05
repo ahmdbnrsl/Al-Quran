@@ -114,7 +114,7 @@ export default () => {
                 <h1 className="hero-title">القرآن الكريم</h1>
                 {
                     !recentRead ?
-                    <Link to="/surah/1?nama=Al-Fatihah#7" className="history-box items-center">
+                    <Link to="/surah/1?nama=Al-Fatihah" className="history-box items-center">
                         <div>
                             <p className="desc-tempat-turun">
                                 Lanjutkan membaca

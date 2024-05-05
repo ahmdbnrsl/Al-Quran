@@ -8,7 +8,11 @@ import parse from 'html-react-parser';
 import { 
     useState, 
     useEffect,
-    ChangeEvent
+    forwardRef,
+    LegacyRef,
+    ChangeEvent,
+    SyntheticEvent,
+    ForwardRefRenderFunction
 } from 'react';
 import { 
     FaRegCopy, 
@@ -88,14 +92,7 @@ export default () => {
                 if(query !== resStorage?.nama_latin) {
                     navigate('/surah')
                 }
-                const ids: string = window.location.hash;
-                const el: HTMLElement | null = document.getElementById(ids.replace(/#/g, ""));
-                if(el !== null || el) {
-                    el.scrollIntoView({
-                        block: 'nearest',
-                        behavior: 'smooth'
-                    });
-                }
+                
             }
         }
     }, [surah, desc, ayahLoading]);
@@ -111,6 +108,7 @@ export default () => {
     }
     
     const query = searchParams.get("Ayah");
+    const ID = "7";
     
     const filteredAyah = surah?.filter((ayah: DetailAyat): boolean | undefined => {
         return ayah?.nomor?.toString().toLowerCase().includes(query?.toLowerCase() || "")
@@ -118,6 +116,7 @@ export default () => {
     
     return (
         <>
+            <a className="hidden scroll" href={`#${ID}`}></a>
             <div className="detail-hero">
                 <h1 className="hero-title">القرآن الكريم</h1>
             {
@@ -163,22 +162,34 @@ export default () => {
                    }
                    {
                         !ayahLoading && filteredAyah?.length > 0 ? filteredAyah?.map((ayat: DetailAyat) => {
-                            return (
-                                <ListAyat ayat={ayat}/>
-                            )
+                            if(ayat?.id?.toString() === ID) {
+                                return (
+                                    <ListAyat 
+                                    ayat={ayat} 
+                                    styles="border-teal-500 dark:border-orange-500"
+                                    />
+                                )
+                            } else {
+                                return (
+                                    <ListAyat ayat={ayat}/>
+                                )
+                            }
                         }) : !ayahLoading && <p className="font-mulish text-lg mt-5 text-teal-500 dark:text-orange-500">Ayah tidak ditemukan.</p>
                     }
                     
                 </div>
+                <div id="beni"></div>
             </div>
         </>
     )
 }
 
-const ListAyat = ({ayat} : {ayat: DetailAyat}) => {
+const ListAyat = (
+    {ayat, styles} : { ayat: DetailAyat, styles?: string | undefined },
+) => {
     return (
          <div
-         className="ayat-box pt-6 max-w-[61.5rem]" 
+         className={`ayat-box pt-6 max-w-[61.5rem] ${styles}`}
          id={ayat?.id?.toString() as string}
          key={ayat?.id?.toString() as string}
          >
