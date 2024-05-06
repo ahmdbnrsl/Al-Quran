@@ -37,11 +37,19 @@ export default () => {
         password: string;
     }
     
+    interface DataRecent {
+        nama: string;
+        nama_latin: string;
+        id: string;
+        ayat: string;
+        id_surah: string;
+    }
+    
     const getCookieValue = (name: string) => (
         document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
     );
     
-    const recentRead: boolean = false;
+    const [recent, setRecent] = useState<DataRecent | null>(null);
     const [searchParams, setSearchParams] = useSearchParams();
     const [user, setUser] = useState<User | null>(null);
     const [hidden, setHidden] = useState<boolean>(false);
@@ -50,6 +58,7 @@ export default () => {
     const [loadingSurah, setLoadingSurah] = useState<boolean>(true);
     const [loadingProfile, setLoadingProfile] = useState<boolean>(true);
     const getSurah: string | null = window.localStorage.getItem('list_surah');
+    const getRecent: string | null = window.localStorage.getItem('recent_read');
     const navigate = useNavigate();
     
     useEffect(() => {
@@ -61,6 +70,13 @@ export default () => {
             setUser(userInfo);
         }
     }, []);
+    
+    useEffect(() => {
+        if(getRecent) {
+            const dataRecent: DataRecent = JSON.parse(getRecent);
+            setRecent(dataRecent);
+        }
+    }, [recent])
     
     useEffect(() => {
         if(!getSurah) {
@@ -113,22 +129,22 @@ export default () => {
             <div className="hero-box">
                 <h1 className="hero-title">القرآن الكريم</h1>
                 {
-                    !recentRead ?
-                    <Link to="/surah/1?nama=Al-Fatihah" className="history-box items-center">
+                    recent ?
+                    <Link to={`/surah/${recent?.id_surah}?nama=${recent?.nama_latin}`} className="history-box items-center">
                         <div>
                             <p className="desc-tempat-turun">
                                 Lanjutkan membaca
                             </p>
                             <p className="desc-nama-latin">
-                                Al-Baqarah
+                                {recent?.nama_latin}
                             </p>
                             <p className="desc-arti">
-                                Ayat 256
+                                Ayat {recent?.ayat}
                             </p>
                         </div>
                         <div>
                             <h1 className="desc-nama">
-                                البقرة
+                                {recent?.nama}
                             </h1>
                         </div>
                     </Link>

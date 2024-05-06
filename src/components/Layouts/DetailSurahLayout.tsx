@@ -119,15 +119,16 @@ export default () => {
     
     useEffect(() => {
         const getRecentRead: null | string = window.localStorage.getItem("recent_read");
+        const dataRecents: {
+            nama: string,
+            nama_latin: string,
+            ayat: string,
+            id: string,
+            id_surah: string
+        } = JSON.parse(getRecentRead as string);
         if(getRecentRead) {
-            const dataRecents: {
-                nama: string,
-                nama_latin: string,
-                ayat: string,
-                id: string
-            } = JSON.parse(getRecentRead);
             setID(dataRecents?.id);
-            setNomorAyat(dataRecents?.ayat)
+            setNomorAyat(dataRecents?.ayat);
         }
     }, [ID, nomorAyat]);
     
@@ -160,7 +161,7 @@ export default () => {
                             <p className="desc-jumlah-ayat">{desc?.jumlah_ayat?.toLocaleString('ar-EG')} اية</p>
                         </div>
                     </div>
-                    {ID && <div className="px-5 pb-5">
+                    {document.getElementById(ID) && <div className="px-5 pb-5">
                         <button onClick={HandleScroll} className="btn">Lanjutkan membaca (Ayat {nomorAyat})</button>
                     </div> }
                 </div>
@@ -192,6 +193,7 @@ export default () => {
                                     namaLatin={desc?.nama_latin}
                                     textBtn="Ditandai"
                                     ayat={ayat} 
+                                    idSurah={desc?.nomor?.toString()}
                                     styles="border-2 border-teal-500 dark:border-orange-500"
                                     />
                                 )
@@ -201,6 +203,7 @@ export default () => {
                                     ayat={ayat}
                                     namaSurah={desc?.nama}
                                     namaLatin={desc?.nama_latin}
+                                    idSurah={desc?.nomor?.toString()}
                                     />
                                 )
                             }
@@ -215,12 +218,13 @@ export default () => {
 }
 
 const ListAyat = (
-    {ayat, styles, textBtn, namaSurah, namaLatin} : {
+    {ayat, styles, textBtn, namaSurah, namaLatin, idSurah} : {
         ayat: DetailAyat,
         styles?: string | undefined,
         textBtn?: string,
         namaSurah?: string,
-        namaLatin?: string
+        namaLatin?: string,
+        idSurah?: string
     }
 ) => {
     return (
@@ -253,7 +257,8 @@ const ListAyat = (
                             nama: string,
                             nama_latin: string,
                             ayat: string,
-                            id: string
+                            id: string,
+                            id_surah: string
                         } = JSON.parse(getRecentRead);
                         if(dataRecent?.id === ayat?.id?.toString()) {
                             window.localStorage.removeItem("recent_read");
@@ -263,7 +268,8 @@ const ListAyat = (
                                 nama: namaSurah,
                                 nama_latin: namaLatin,
                                 ayat: ayat?.nomor?.toString(),
-                                id: ayat?.id?.toString()
+                                id: ayat?.id?.toString(),
+                                id_surah: idSurah
                             }))
                         }
                     } else {
@@ -271,7 +277,8 @@ const ListAyat = (
                             nama: namaSurah,
                             nama_latin: namaLatin,
                             ayat: ayat?.nomor?.toString(),
-                            id: ayat?.id?.toString()
+                            id: ayat?.id?.toString(),
+                            id_surah: idSurah
                         }));
                     }
                 }}
