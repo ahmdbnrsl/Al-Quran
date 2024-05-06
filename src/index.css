@@ -101,14 +101,20 @@
     .list-surah-container {
         @apply w-full flex justify-center p-5
     }
+    .list-ayah-container {
+        @apply w-full flex justify-center p-0 sm:p-5
+    }
     .list-surah {
         @apply w-full max-w-[61.5rem] flex flex-wrap justify-center gap-3
+    }
+    .list-ayah {
+        @apply gap-0 w-full max-w-[61.5rem] flex flex-wrap justify-center sm:gap-3
     }
     .surah-box {
         @apply flex justify-between w-full px-4 py-3 rounded bg-zinc-50 shadow shadow-2xl shadow-zinc-200 border border-zinc-200 items-center dark:bg-zinc-900 dark:shadow-zinc-950 dark:border-zinc-800
     }
     .ayat-box {
-        @apply flex flex-col w-full p-5 rounded-xl bg-zinc-50 shadow shadow-2xl shadow-zinc-200 border border-zinc-200 items-start dark:bg-zinc-900 dark:shadow-zinc-950 dark:border-zinc-800
+        @apply border-0 rounded-none shadow-none flex flex-col w-full p-5 sm:rounded-xl bg-zinc-50 sm:shadow sm:shadow-2xl shadow-zinc-200 sm:border border-zinc-200 items-start dark:bg-zinc-900 dark:shadow-zinc-950 dark:border-zinc-800
     }
     .icon-star {
         @apply text-teal-500 text-3xl dark:text-orange-500

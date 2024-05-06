@@ -4,6 +4,7 @@ import {
     Ayat,
     DetailAyat
 } from '../.././types/ResultDetailSurah.interface.ts';
+import { DataRecent } from '../.././types/DataRecent.interface.ts';
 import parse from 'html-react-parser';
 import { 
     useState, 
@@ -56,13 +57,7 @@ export default () => {
         } else {
             const dataSurah: string = window.localStorage.getItem("id_surah_" + id) as string;
             const getRecentRead: null | string = window.localStorage.getItem("recent_read");
-            const dataRecents: {
-                nama: string,
-                nama_latin: string,
-                ayat: string,
-                id: string,
-                id_surah: string
-            } = JSON.parse(getRecentRead as string);
+            const dataRecents: DataRecent = JSON.parse(getRecentRead as string);
         
             const query = searchParams.get("nama");
             if(!dataSurah) {
@@ -147,7 +142,6 @@ export default () => {
     
     return (
         <>
-            <a className="hidden scroll" href={`#${ID}`}></a>
             <div className="detail-hero">
                 <h1 className="hero-title">القرآن الكريم</h1>
             {
@@ -184,8 +178,8 @@ export default () => {
                     />
                 </div>
             </div>
-            <div className="list-surah-container">
-                <div className="gap-3 list-surah flex flex-col items-center justify-start">
+            <div className="list-ayah-container">
+                <div className="list-ayah flex flex-col items-center justify-start">
                    {
                         ayahLoading && Array(20).fill(0).map(() => {
                             return <AyahSkeleton/>
@@ -201,7 +195,8 @@ export default () => {
                                     textBtn="Ditandai"
                                     ayat={ayat} 
                                     idSurah={desc?.nomor?.toString()}
-                                    styles="border-2 border-teal-500 dark:border-orange-500"
+                                    bgMark="bg-teal-100 dark:bg-orange-950"
+                                    styles="sm:border-2 sm:border-teal-500 sm:dark:border-orange-500"
                                     />
                                 )
                             } else {
@@ -225,16 +220,54 @@ export default () => {
 }
 
 const ListAyat = (
-    {ayat, styles, textBtn, namaSurah, namaLatin, idSurah} : {
+    {ayat, styles, textBtn, namaSurah, namaLatin, idSurah, bgMark} : {
         ayat: DetailAyat,
         styles?: string | undefined,
         textBtn?: string,
         namaSurah?: string,
         namaLatin?: string,
-        idSurah?: string
+        idSurah?: string,
+        bgMark?: string
     }
 ) => {
     const [copyed, setCopyed] = useState<boolean>(false);
+    
+    const HandleCopy = () => {
+        window.navigator.vibrate(100);
+        window.navigator.clipboard.writeText("Teks Arab : \n\n" + ayat?.ar?.replace(/ ࣖ/g, '').replace(/\ٖ/g, '') + "\n\nArtinya:\n" + ayat?.idn);
+        setCopyed(true);
+        setTimeout(() => {
+            setCopyed(false);
+        }, 300)
+    }
+    
+    const HandleMark = () => {
+        const getRecentRead: null | string = window.localStorage.getItem("recent_read");
+        if(getRecentRead) {
+            const dataRecent: DataRecent = JSON.parse(getRecentRead);
+            if(dataRecent?.id === ayat?.id?.toString()) {
+                window.localStorage.removeItem("recent_read");
+            } else {
+                window.localStorage.removeItem("recent_read");
+                window.localStorage.setItem("recent_read", JSON.stringify({
+                    nama: namaSurah,
+                    nama_latin: namaLatin,
+                    ayat: ayat?.nomor?.toString(),
+                    id: ayat?.id?.toString(),
+                    id_surah: idSurah
+                }))
+            }
+        } else {
+            window.localStorage.setItem("recent_read", JSON.stringify({
+                nama: namaSurah,
+                nama_latin: namaLatin,
+                ayat: ayat?.nomor?.toString(),
+                id: ayat?.id?.toString(),
+                id_surah: idSurah
+            }));
+        }
+    }
+    
     return (
         <div
          className={`ayat-box pt-6 max-w-[61.5rem] ${styles}`}
@@ -242,7 +275,7 @@ const ListAyat = (
          key={ayat?.id?.toString() as string}
         >
             <div dir="rtl" className="w-full">
-                <h1 className="ayat-arab">
+                <h1 className={`ayat-arab ${bgMark}`}>
                     {ayat?.ar?.replace(/ ࣖ/g, '').replace(/\ٖ/g, 'ٍ')}
                     <span className="ayat-nomor">
                         &#64831;{ayat?.nomor?.toLocaleString('ar-EG')}&#64830;
@@ -258,38 +291,7 @@ const ListAyat = (
             <div className="w-full flex justify-start gap-3">
                 <button 
                 className="items-center btn rounded-full w-auto gap-2"
-                onClick={() => {
-                    const getRecentRead: null | string = window.localStorage.getItem("recent_read");
-                    if(getRecentRead) {
-                        const dataRecent: {
-                            nama: string,
-                            nama_latin: string,
-                            ayat: string,
-                            id: string,
-                            id_surah: string
-                        } = JSON.parse(getRecentRead);
-                        if(dataRecent?.id === ayat?.id?.toString()) {
-                            window.localStorage.removeItem("recent_read");
-                        } else {
-                            window.localStorage.removeItem("recent_read");
-                            window.localStorage.setItem("recent_read", JSON.stringify({
-                                nama: namaSurah,
-                                nama_latin: namaLatin,
-                                ayat: ayat?.nomor?.toString(),
-                                id: ayat?.id?.toString(),
-                                id_surah: idSurah
-                            }))
-                        }
-                    } else {
-                        window.localStorage.setItem("recent_read", JSON.stringify({
-                            nama: namaSurah,
-                            nama_latin: namaLatin,
-                            ayat: ayat?.nomor?.toString(),
-                            id: ayat?.id?.toString(),
-                            id_surah: idSurah
-                        }));
-                    }
-                }}
+                onClick={HandleMark}
                 >
                     {
                         !textBtn ? <FaRegBookmark/> : <FaBookmark/>
@@ -298,14 +300,7 @@ const ListAyat = (
                 </button>
                 <button 
                 className="items-center btn rounded-full px-3 w-auto bg-zinc-200 text-teal-500 dark:text-orange-500 dark:bg-zinc-800"
-                onClick={() => {
-                    window.navigator.vibrate(100);
-                    window.navigator.clipboard.writeText("Teks Arab : \n\n" + ayat?.ar?.replace(/ ࣖ/g, '').replace(/\ٖ/g, '') + "\n\nArtinya:\n" + ayat?.idn);
-                    setCopyed(true);
-                    setTimeout(() => {
-                        setCopyed(false);
-                    }, 300)
-                }}
+                onClick={HandleCopy}
                 >
                     {
                         !copyed ? <FaRegCopy/> : <FaCheck/>
