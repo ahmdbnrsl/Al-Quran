@@ -8,13 +8,15 @@ import parse from 'html-react-parser';
 import { 
     useState, 
     useEffect,
-    ChangeEvent
+    ChangeEvent,
+    MouseEvent
 } from 'react';
 import { 
     FaRegCopy, 
     FaRegBookmark, 
     FaRegShareFromSquare,
-    FaBookmark
+    FaBookmark,
+    FaCheck
 } from "react-icons/fa6";
 import { 
     useParams,
@@ -53,6 +55,15 @@ export default () => {
             navigate('/surah');
         } else {
             const dataSurah: string = window.localStorage.getItem("id_surah_" + id) as string;
+            const getRecentRead: null | string = window.localStorage.getItem("recent_read");
+            const dataRecents: {
+                nama: string,
+                nama_latin: string,
+                ayat: string,
+                id: string,
+                id_surah: string
+            } = JSON.parse(getRecentRead as string);
+        
             const query = searchParams.get("nama");
             if(!dataSurah) {
                 detailSurah(id, (result: DetailSurahs | undefined): void => {
@@ -74,6 +85,12 @@ export default () => {
                     if(result !== undefined || result) {
                         window.localStorage.setItem('id_surah_' + result?.nomor?.toString(), JSON.stringify(result));
                     }
+                    if(getRecentRead) {
+                        setID(dataRecents?.id);
+                        setNomorAyat(dataRecents?.ayat);
+                    } else {
+                        setID("");
+                    }
                 });
             } else {
                 const resStorage: DetailSurahs = JSON.parse(dataSurah);
@@ -92,10 +109,15 @@ export default () => {
                 if(query !== resStorage?.nama_latin) {
                     navigate('/surah')
                 }
-                
+                if(getRecentRead) {
+                    setID(dataRecents?.id);
+                    setNomorAyat(dataRecents?.ayat);
+                } else {
+                    setID("");
+                }
             }
         }
-    }, [surah, desc, ayahLoading]);
+    }, [surah, desc, ayahLoading, ID, nomorAyat]);
     
     const SearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
         if (e.target.value !== "") {
@@ -116,21 +138,6 @@ export default () => {
             })
         }
     }
-    
-    useEffect(() => {
-        const getRecentRead: null | string = window.localStorage.getItem("recent_read");
-        const dataRecents: {
-            nama: string,
-            nama_latin: string,
-            ayat: string,
-            id: string,
-            id_surah: string
-        } = JSON.parse(getRecentRead as string);
-        if(getRecentRead) {
-            setID(dataRecents?.id);
-            setNomorAyat(dataRecents?.ayat);
-        }
-    }, [ID, nomorAyat]);
     
     const query = searchParams.get("Ayah");
     
@@ -227,12 +234,13 @@ const ListAyat = (
         idSurah?: string
     }
 ) => {
+    const [copyed, setCopyed] = useState<boolean>(false);
     return (
-         <div
+        <div
          className={`ayat-box pt-6 max-w-[61.5rem] ${styles}`}
          id={ayat?.id?.toString() as string}
          key={ayat?.id?.toString() as string}
-         >
+        >
             <div dir="rtl" className="w-full">
                 <h1 className="ayat-arab">
                     {ayat?.ar?.replace(/ ࣖ/g, '').replace(/\ٖ/g, 'ٍ')}
@@ -288,8 +296,20 @@ const ListAyat = (
                     }
                     {!textBtn ? "Tandai" : textBtn}
                 </button>
-                <button className="items-center btn rounded-full px-3 w-auto bg-zinc-200 text-teal-500 dark:text-orange-500 dark:bg-zinc-800">
-                    <FaRegCopy/>
+                <button 
+                className="items-center btn rounded-full px-3 w-auto bg-zinc-200 text-teal-500 dark:text-orange-500 dark:bg-zinc-800"
+                onClick={() => {
+                    window.navigator.vibrate(100);
+                    window.navigator.clipboard.writeText("Teks Arab : \n\n" + ayat?.ar?.replace(/ ࣖ/g, '').replace(/\ٖ/g, '') + "\n\nArtinya:\n" + ayat?.idn);
+                    setCopyed(true);
+                    setTimeout(() => {
+                        setCopyed(false);
+                    }, 300)
+                }}
+                >
+                    {
+                        !copyed ? <FaRegCopy/> : <FaCheck/>
+                    }
                 </button>
                 <button className="items-center btn rounded-full px-3 w-auto bg-zinc-200 text-teal-500 dark:text-orange-500 dark:bg-zinc-800">
                     <FaRegShareFromSquare/>
