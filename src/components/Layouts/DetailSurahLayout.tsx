@@ -179,7 +179,7 @@ export default () => {
             </div>
             <div className="nav-box mt-0 justify-center border-t border-b border-zinc-200 dark:border-zinc-800">
                 <div className="flex gap-3 justify-between items-center w-full max-w-[61.5rem]">
-                    <Link to="/surah" className="text-2xl text-teal-500 dark:text-orange-500 w-auto">
+                    <Link to="/surah" className="text-2xl text-teal-500 dark:text-orange-500 w-auto rounded-full p-3 hover:bg-zinc-100 hover:dark:bg-zinc-950">
                         <FaArrowLeftLong/>
                     </Link>
                     <div className="w-full max-w-[15rem] relative flex justify-end items-center">
@@ -235,7 +235,7 @@ export default () => {
                 <div className="flex flex-wrap gap-3 p-5 justify-between items-center w-full max-w-[61.5rem]">
                     {
                         !before ? 
-                        <button className="bg-zinc-200 text-zinc-400 m-0 btn w-auto items-center dark:bg-zinc-800 dark:text-zinc-600">
+                        <button disabled className="bg-zinc-200 text-zinc-400 m-0 btn w-auto items-center dark:bg-zinc-800 dark:text-zinc-600">
                             <FaArrowLeftLong className="mr-2"/>
                             Sebelumnya
                         </button>
@@ -247,7 +247,7 @@ export default () => {
                     }
                     {
                         !after ? 
-                        <button className="bg-zinc-200 text-zinc-400 m-0 btn w-auto items-center dark:bg-zinc-800 dark:text-zinc-600">
+                        <button disabled className="bg-zinc-200 text-zinc-400 m-0 btn w-auto items-center dark:bg-zinc-800 dark:text-zinc-600">
                             Selanjutnya
                             <FaArrowRightLong className="ml-2"/>
                         </button>
@@ -312,6 +312,14 @@ const ListAyat = (
         }
     }
     
+    const HandleShare = () => {
+        navigator.share({
+            url: "https://alquranqu.vercel.app",
+            text: "Aplikasi Al Qur'an dan Terjemahannya.",
+            title: "Alquranqu"
+        })
+    }
+    
     return (
         <div
          className={`ayat-box pt-6 max-w-[61.5rem] ${styles}`}
@@ -350,7 +358,9 @@ const ListAyat = (
                         !copyed ? <FaRegCopy/> : <FaCheck/>
                     }
                 </button>
-                <button className="items-center btn rounded-full px-3 w-auto bg-zinc-200 text-teal-500 dark:text-orange-500 dark:bg-zinc-800">
+                <button 
+                onClick={HandleShare}
+                className="items-center btn rounded-full px-3 w-auto bg-zinc-200 text-teal-500 dark:text-orange-500 dark:bg-zinc-800">
                     <FaRegShareFromSquare/>
                 </button>
             </div>
