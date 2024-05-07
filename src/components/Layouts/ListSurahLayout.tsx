@@ -6,7 +6,7 @@ import {
     ChangeEvent
 } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import { FaCircleUser } from "react-icons/fa6";
+import { FaCircleUser, FaArrowRightLong } from "react-icons/fa6";
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
 import { IoSearch } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
@@ -132,8 +132,9 @@ export default () => {
                     recent ?
                     <Link to={`/surah/${recent?.id_surah}?nama=${recent?.nama_latin}`} className="history-box items-center">
                         <div>
-                            <p className="desc-tempat-turun">
+                            <p className="desc-tempat-turun flex items-center">
                                 Lanjutkan membaca
+                                <FaArrowRightLong className="ml-2"/>
                             </p>
                             <p className="desc-nama-latin">
                                 {recent?.nama_latin}

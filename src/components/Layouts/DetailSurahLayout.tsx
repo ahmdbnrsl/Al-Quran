@@ -17,8 +17,11 @@ import {
     FaRegBookmark, 
     FaRegShareFromSquare,
     FaBookmark,
-    FaCheck
+    FaCheck,
+    FaArrowLeftLong,
+    FaArrowRightLong
 } from "react-icons/fa6";
+import { IoSearch } from "react-icons/io5";
 import { 
     useParams,
     useNavigate,
@@ -39,6 +42,8 @@ export default () => {
     const [surah, setSurah] = useState<Array<Ayat>>([]);
     const [ID, setID] = useState<string>("");
     const [nomorAyat, setNomorAyat] = useState<string>("");
+    const [before, setBefore] = useState<SurahBeforeAfter | undefined | null | false>(null);
+    const [after, setAfter] = useState<SurahBeforeAfter | null | undefined | false>(null);
     
     const getCookieValue = (name: string) => (
         document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
@@ -63,6 +68,8 @@ export default () => {
             if(!dataSurah) {
                 detailSurah(id, (result: DetailSurahs | undefined): void => {
                     setSurah(result?.ayat as Array<Ayat>);
+                    setBefore(result?.surat_sebelumnya);
+                    setAfter(result?.surat_selanjutnya);
                     setAyahLoading(false);
                     setDesc({
                         nomor: result?.nomor,
@@ -100,6 +107,8 @@ export default () => {
                     audio: resStorage?.audio
                 });
                 setSurah(resStorage?.ayat as Array<Ayat>);
+                setBefore(resStorage?.surat_sebelumnya);
+                setAfter(resStorage?.surat_selanjutnya);
                 setAyahLoading(false);
                 if(query !== resStorage?.nama_latin) {
                     navigate('/surah')
@@ -112,7 +121,7 @@ export default () => {
                 }
             }
         }
-    }, [surah, desc, ayahLoading, ID, nomorAyat]);
+    }, [surah, desc, ayahLoading, ID, nomorAyat, after, before]);
     
     const SearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
         if (e.target.value !== "") {
@@ -163,19 +172,27 @@ export default () => {
                         </div>
                     </div>
                     {document.getElementById(ID) && <div className="px-5 pb-5">
-                        <button onClick={HandleScroll} className="btn">Lanjutkan membaca (Ayat {nomorAyat})</button>
+                        <button onClick={HandleScroll} className="btn m-0">Lanjutkan membaca (Ayat {nomorAyat})</button>
                     </div> }
                 </div>
             }
             </div>
-            <div className="nav-box mt-0 justify-center border-t border-zinc-200 dark:border-zinc-800">
-                <div className="justify-between w-full max-w-[61.5rem]">
-                    <Input 
-                    text="Cari Ayat"
-                    identify="search"
-                    onChanges={SearchChange}
-                    styles="text-sm max-w-[15rem] placeholder:text-zinc-400 dark:placeholder:text-zinc-600"
-                    />
+            <div className="nav-box mt-0 justify-center border-t border-b border-zinc-200 dark:border-zinc-800">
+                <div className="flex gap-3 justify-between items-center w-full max-w-[61.5rem]">
+                    <Link to="/surah" className="text-2xl text-teal-500 dark:text-orange-500 w-auto">
+                        <FaArrowLeftLong/>
+                    </Link>
+                    <div className="w-full max-w-[15rem] relative flex justify-end items-center">
+                        <Input 
+                        text="Cari Ayat"
+                        identify="search"
+                        onChanges={SearchChange}
+                        styles="text-sm placeholder:text-zinc-400 dark:placeholder:text-zinc-600"
+                        />
+                        <div className="mr-0.5 py-2 px-4 absolute rounded-r-xl bg-zinc-100 dark:bg-zinc-900">
+                            <IoSearch className="text-xl text-teal-500 dark:text-orange-500"/>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="list-ayah-container">
@@ -213,7 +230,34 @@ export default () => {
                     }
                     
                 </div>
-                <div id="beni"></div>
+            </div>
+            <div className="mt-auto border-t border-zinc-200 bg-zinc-50 w-full sticky bottom-0 flex justify-center items-center dark:bg-zinc-900 dark:border-zinc-800">
+                <div className="flex flex-wrap gap-3 p-5 justify-between items-center w-full max-w-[61.5rem]">
+                    {
+                        !before ? 
+                        <button className="bg-zinc-200 text-zinc-400 m-0 btn w-auto items-center dark:bg-zinc-800 dark:text-zinc-600">
+                            <FaArrowLeftLong className="mr-2"/>
+                            Sebelumnya
+                        </button>
+                        :
+                        <Link to={`/surah/${before?.nomor?.toString()}?nama=${before?.nama_latin}`} className="m-0 btn w-auto items-center">
+                            <FaArrowLeftLong className="mr-2"/>
+                            Sebelumnya
+                        </Link>
+                    }
+                    {
+                        !after ? 
+                        <button className="bg-zinc-200 text-zinc-400 m-0 btn w-auto items-center dark:bg-zinc-800 dark:text-zinc-600">
+                            Selanjutnya
+                            <FaArrowRightLong className="ml-2"/>
+                        </button>
+                        :
+                        <Link to={`/surah/${after?.nomor?.toString()}?nama=${after?.nama_latin}`} className="m-0 btn w-auto items-center">
+                            Selanjutnya
+                            <FaArrowRightLong className="ml-2"/>
+                        </Link>
+                    }
+                </div>
             </div>
         </>
     )

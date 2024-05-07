@@ -5,7 +5,7 @@ import Footer from '.././components/Layouts/FooterLayout.tsx';
 export default () => {
     return (
         <div className="index-box justify-between">
-            <div className="index-box">
+            <div className="index-list-box">
                 <ListSurahLayout/>
             </div>
             <Footer/>

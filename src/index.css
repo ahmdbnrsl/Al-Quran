@@ -36,6 +36,9 @@
         @apply scroll-smooth
     }
     .index-box {
+        @apply flex flex-col items-center bg-zinc-50 sm:bg-index-light bg-smaller w-full min-h-screen dark:bg-zinc-900 sm:dark:bg-index-dark
+    }
+    .index-list-box {
         @apply flex flex-col items-center bg-zinc-100 bg-index-light bg-smaller w-full min-h-screen dark:bg-zinc-900 dark:bg-index-dark
     }
     .hero-box {
@@ -102,7 +105,7 @@
         @apply w-full flex justify-center p-5
     }
     .list-ayah-container {
-        @apply w-full flex justify-center p-0 sm:p-5
+        @apply w-full flex justify-center py-5 sm:p-5
     }
     .list-surah {
         @apply w-full max-w-[61.5rem] flex flex-wrap justify-center gap-3
@@ -114,7 +117,7 @@
         @apply flex justify-between w-full px-4 py-3 rounded bg-zinc-50 shadow shadow-2xl shadow-zinc-200 border border-zinc-200 items-center dark:bg-zinc-900 dark:shadow-zinc-950 dark:border-zinc-800
     }
     .ayat-box {
-        @apply border-0 rounded-none shadow-none flex flex-col w-full p-5 sm:rounded-xl bg-zinc-50 sm:shadow sm:shadow-2xl shadow-zinc-200 sm:border border-zinc-200 items-start dark:bg-zinc-900 dark:shadow-zinc-950 dark:border-zinc-800
+        @apply border-0 rounded-none shadow-none flex flex-col w-full p-5 sm:rounded-xl bg-zinc-50 sm:shadow sm:shadow-2xl sm:shadow-zinc-200 sm:border sm:border-zinc-200 items-start dark:bg-zinc-900 sm:dark:shadow-zinc-950 sm:dark:border-zinc-800
     }
     .icon-star {
         @apply text-teal-500 text-3xl dark:text-orange-500
