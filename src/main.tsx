@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         element: <DetailSurah/>
     },
     {
-        path: "/privasipolisi",
+        path: "/kebijakan_privasi",
         element: <PrivacyPolicy/>
     }
 ])

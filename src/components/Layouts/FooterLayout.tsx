@@ -24,7 +24,7 @@ export default () => {
                 <div className="flex flex-col">
                     <h1 className="footer-title">Informasi</h1>
                     <Link to="/pengantar" className="footer-navigate">Pengantar</Link>
-                    <Link to="/privasipolisi" className="footer-navigate">Privasi & Polisi</Link>
+                    <Link to="/kebijakan_privasi" className="footer-navigate">Kebijakan Privasi</Link>
                 </div>
                 <div className="flex flex-col">
                     <h1 className="footer-title">Fitur</h1>
