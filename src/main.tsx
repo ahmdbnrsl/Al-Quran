@@ -5,6 +5,7 @@ import Register from './pages/Register.tsx';
 import Login from './pages/Login.tsx';
 import ListSurah from './pages/ListSurah.tsx';
 import DetailSurah from './pages/DetailSurah.tsx'
+import PrivacyPolicy from './pages/PrivacyPolicy.tsx'
 import App from './App.tsx'
 import './index.css'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
     {
         path: "/surah/:id",
         element: <DetailSurah/>
+    },
+    {
+        path: "/privasipolisi",
+        element: <PrivacyPolicy/>
     }
 ])
 ReactDOM.createRoot(document.getElementById('root')!).render(
