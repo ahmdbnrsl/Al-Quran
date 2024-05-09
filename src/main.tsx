@@ -6,15 +6,16 @@ import Login from './pages/Login.tsx';
 import ListSurah from './pages/ListSurah.tsx';
 import DetailSurah from './pages/DetailSurah.tsx'
 import PrivacyPolicy from './pages/PrivacyPolicy.tsx'
-import App from './App.tsx'
+import Home from './pages/Home.tsx';
+import NotFound from './pages/404.tsx'
 import './index.css'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App/>,
-        errorElement: <p>404</p>
+        element: <Home/>,
+        errorElement: <NotFound/>
     },
     {
         path: "/surah",

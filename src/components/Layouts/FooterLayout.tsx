@@ -16,14 +16,13 @@ export default () => {
             <div className="footer mt-5">
                 <div className="flex flex-col">
                     <h1 className="footer-title">Navigasi</h1>
-                    <Link to="/beranda" className="footer-navigate">Beranda</Link>
+                    <Link to="/" className="footer-navigate">Beranda</Link>
                     <Link to="/surah" className="footer-navigate">Surah</Link>
                     <Link to="/daftar" className="footer-navigate">Daftar</Link>
                     <Link to="/masuk" className="footer-navigate">Masuk</Link>
                 </div>
                 <div className="flex flex-col">
                     <h1 className="footer-title">Informasi</h1>
-                    <Link to="/pengantar" className="footer-navigate">Pengantar</Link>
                     <Link to="/kebijakan_privasi" className="footer-navigate">Kebijakan Privasi</Link>
                 </div>
                 <div className="flex flex-col">
