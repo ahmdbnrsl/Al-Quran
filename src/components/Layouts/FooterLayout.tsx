@@ -35,7 +35,7 @@ export default () => {
                     <h1 className="footer-title">Teknologi</h1>
                     <Link to="https://react.dev" className="footer-navigate">React Js</Link>
                     <Link to="https://tailwindcss.com" className="footer-navigate">Tailwind CSS</Link>
-                    <Link to="https://vitejs.com" className="footer-navigate">Vite</Link>
+                    <Link to="https://vitejs.dev" className="footer-navigate">Vite</Link>
                     <Link to="https://nodejs.org" className="footer-navigate">Node Js</Link>
                     <Link to="https://typescript.com" className="footer-navigate">Typescript</Link>
                     <Link to="https://mongodb.com" className="footer-navigate">Mongo DB</Link>
@@ -57,23 +57,23 @@ export default () => {
                     }
                     <h1 className="font-mulish font-black text-xl -mt-3 mb-0 border-b-0 text-teal-500 dark:text-orange-500">Alquranqu</h1>
                     <div className="flex flex-wrap justify-center gap-4 mt-2">
-                        <Link to="https://instagram.com/ahmd_bn.tsx" className="footer-navigate text-lg">
+                        <Link to="https://Instagram.com/ahmd.bn.tsx" className="footer-navigate text-lg">
                             <FaInstagram/>
                         </Link>
-                        <Link to="https://instagram.com/ahmd_bn.tsx" className="footer-navigate text-lg">
+                        <Link to="https://twitter.com/LiviaOdrig88804" className="footer-navigate text-lg">
                             <FaXTwitter/>
                         </Link>
-                        <Link to="https://instagram.com/ahmd_bn.tsx" className="footer-navigate text-lg">
+                        <Link to="https://www.linkedin.com/in/ahmad-beny-15391b289?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" className="footer-navigate text-lg">
                             <FaLinkedin/>
                         </Link>
-                        <Link to="https://instagram.com/ahmd_bn.tsx" className="footer-navigate text-lg">
+                        <Link to="https://www.tiktok.com/@then_benbennnnn23.exs?_t=8mDalLhRUhk&_r=1" className="footer-navigate text-lg">
                             <FaTiktok/>
                         </Link>
-                        <Link to="https://instagram.com/ahmd_bn.tsx" className="footer-navigate text-lg">
+                        <Link to="https://github.com/abrazax56" className="footer-navigate text-lg">
                             <FaGithub/>
                         </Link>
                     </div>
-                    <p className="mt-2 text-sm font-mulish text-zinc-900 dark:text-zinc-500">© 2024 | Ahmad Beni Rusli</p>
+                    <p className="mt-2 text-sm font-mulish text-zinc-900 dark:text-zinc-500">© 2024 | Ahmad Beni Rusli | Untuk Allah</p>
                 </div>
             </div>
         </div>
