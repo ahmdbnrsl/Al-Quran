@@ -7,8 +7,6 @@ import { submitValidate } from '../.././service/Validation/EventSubmit.ts';
 import { login } from '../.././service/Auth/Login.ts';
 import { register } from '../.././service/Auth/Register.ts';
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
-import { FaUserCheck } from 'react-icons/fa6';
-import { MdLogin } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { ZodError } from 'zod';
@@ -64,8 +62,7 @@ export default ({type}: {type?: string}) => {
     
     return (
         <form className="auth-box" onSubmit={HandleSubmit}>
-            <h1 className="title">القرآن الكريم</h1>
-            <Title type={type}/>
+            <h1 className="title mb-5">القرآن الكريم</h1>
             {
                 message && <p className="message">{message}</p>
             }
@@ -105,24 +102,6 @@ export default ({type}: {type?: string}) => {
             <Footer type={type}/>
         </form>
     )
-}
-
-function Title({type}: {type?: string}) {
-    if(type === "daftar") {
-        return (
-            <h1 className="auth-title flex">
-                <FaUserCheck className="mr-2 text-2xl"/>
-                Daftar
-            </h1>
-        )
-    } else {
-        return (
-            <h1 className="auth-title flex">
-                <MdLogin className="mr-2 text-2xl"/>
-                Masuk
-            </h1>
-        )
-    }
 }
 
 function NameInput({type}: {type?: string}) {
