@@ -1,2 +1,2 @@
-<h2 align="center" style="color: gold;">القران الكريم</h2>
+<h3 align="center" style="color: yellow;">القران الكريم</h3>
 
