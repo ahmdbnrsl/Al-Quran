@@ -1,30 +1,32 @@
-# React + TypeScript + Vite
+# Al Qur'an dan Terjemahannya online 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+بسم الله الرحمن الرحيم
+الحمد لله رب العالمين، الرحمن الرحيم، مالك يوم الدين، إياك نعبد وإياك نستعين، نستغفرك ونتوب إليك، نعوذ بك من شرور أنفسنا ومن شرور أعمالنا، من أساء فعليه لعنة الله وله سخطٌ منّا، ومن أحسن فله من الله ثوابٌ عظيم.
+أشهد أن لا إله إلا الله وحده لا شريك له، وأن محمدًا عبده ورسوله، صلى الله عليه وسلم وسلامه وعلى آله وصحبه ومن تبعه بإحسان إلى يوم الدين.
+أما بعد،
+فإنّ القرآن الكريم هو كلام الله تعالى الذي أنزله على نبيّه محمد صلى الله عليه وسلم، وهو معجزة باهرة، وهدى ونور للعالمين، فيه هداية للبشرية جمعاء، وفيه إصلاحٌ للقلوب وتطهيرٌ للنفس، وفيه سعادةٌ في الدنيا والآخرة.
+ولقد اهتمّ المسلمون منذ فجر الإسلام بحفظ القرآن الكريم وتلاوته وتعليمه، ونشر علومه ومعارفه، فأنشأوا المدارس والمعاهد والجامعات، وكتبوا التفاسير والكتب في علوم القرآن الكريم.
+وفي عصرنا الحاضر، ومع التطور التكنولوجي الهائل، أصبح من السهل على المسلمين الوصول إلى القرآن الكريم وتلاوته وتعليمه، وذلك من خلال الإنترنت ووسائل الإعلام المختلفة.
+ومن هذا المنطلق، فقد أنشأنا هذا الموقع الإلكتروني "Alquranqu" ليكون حاضنةً لكتاب الله تعالى، ولتسهيل الوصول إليه على المسلمين في جميع أنحاء العالم.
+يضمّ هذا الموقع الإلكتروني العديد من الميزات، منها:
 
-Currently, two official plugins are available:
+عرض القرآن الكريم برواية حفص عن عاصم
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ترجمة القرآن الكريم إلى العديد من اللغات
 
-## Expanding the ESLint configuration
+تفسير القرآن الكريم
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+أحكام التجويد
 
-- Configure the top-level `parserOptions` property like this:
+قصص الأنبياء
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+مواعظ وأخلاق
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+فتاوى وأجوبة
+
+ونأمل أن يكون هذا الموقع الإلكتروني عونًا للمسلمين في فهم القرآن الكريم وتدبره، وأن يكون سبيلًا لهم لتعلم تعاليمه والالتزام بها في حياتهم.
+نسأل الله تعالى أن يتقبّل منّا هذا العمل خالصًا لوجهه الكريم، وأن يجعله نافعًا للمسلمين في جميع أنحاء العالم.
+والله الموفق والمعين.
+وصلى الله وسلم على نبينا محمد وعلى آله وصحبه وسلم.
+جزاكم الله خيراً
+إدارة موقع Alquran
